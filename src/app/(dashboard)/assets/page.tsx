@@ -77,7 +77,7 @@ export default function Assets() {
 
         <div className="flex-1 pb-5">
           <Tabs defaultValue="deposit" className="gap-4">
-            <TabsList className="glass-effect shadow-sm w-full h-auto p-1 overflow-auto justify-normal gap-2" >
+            <TabsList className="glass-effect shadow-sm w-full h-auto p-1 overflow-auto justify-normal gap-2 bg-white" >
               <TabsTrigger value="deposit" className="data-[state=active]:bg-brand-5 data-[state=active]:text-white p-2 px-4 cursor-pointer border-1 border-brand-5/10 hover:bg-brand-5/5">
                 <ArrowDownCircle className="size-5" />
                 Deposit

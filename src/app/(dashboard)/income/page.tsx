@@ -65,7 +65,7 @@ export default function Income() {
   return (
     <>
       <div className="flex flex-1 flex-col gap-5 p-4">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           <Card className="glass-effect hover:scale-102 transition-all duration-300 group flex-1 gap-2">
             <CardHeader>
               <div className="flex items-center justify-between">
@@ -185,7 +185,7 @@ export default function Income() {
 
         <div className="flex-1 pb-5">
           <Tabs defaultValue="all" className="gap-4">
-          <TabsList className="glass-effect shadow-sm w-full h-auto p-1 overflow-auto justify-normal gap-2" >
+          <TabsList className="glass-effect shadow-sm w-full h-auto p-1 overflow-auto justify-normal gap-2 bg-white" >
               <TabsTrigger value="all" className="data-[state=active]:bg-brand-5 data-[state=active]:text-white p-2 px-4 cursor-pointer border-1 border-brand-5/10 hover:bg-brand-5/5">
                 <BanknoteArrowUp className="size-5" />
                 All income

@@ -10,8 +10,10 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { Button } from "@/components/ui/button";
-import { CalendarIcon } from "lucide-react";
+import { CalendarIcon, ArrowRight, ArrowDownCircle, ArrowUpCircle, Copy, History, LoaderCircle, Users, Sparkle, ChartSpline, GitFork, CalendarArrowUp, Wallet, Gift } from "lucide-react";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useState, useEffect, useContext } from "react";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn, formatPrice } from "@/lib/utils";
 import { format } from "date-fns";
 import { DateRange } from "react-day-picker";
@@ -153,50 +155,56 @@ export default function AllIncomeView() {
 
   return (
     <>
-      <div className={showLegDetails ? "hidden" : "block"}>
-        <div className="mt-2 mb-4 flex-1 text-right flex flex-wrap items-center justify-end gap-5">
+      <Card>
+      <CardHeader>
+      <div className="flex flex-wrap gap-5 justify-between">
+        <div>
+        <CardTitle className="text-brand-3 text-lg lg:text-2xl font-bold">Earnings History</CardTitle>
+        <CardDescription className="text-slate-400 font-medium">Referral bonuses and rewards</CardDescription>
+        </div>
+        <div className="mt-2 mb-4 text-right flex flex-wrap items-center gap-2">
           <Popover open={isCalendarOpen} onOpenChange={setIsCalendarOpen}>
-            <PopoverTrigger asChild>
-              <Button
-                id="date"
-                variant={"outline"}
-                className={cn(
-                  "w-[300px] justify-start text-left font-normal min-h-12 flex-1 min-w-[300px] md:flex-none text-sm lg:text-base",
-                  !tempDate && "text-muted-foreground"
-                )}
-              >
-                <CalendarIcon className="mr-2 h-4 w-4" />
-                {tempDate?.from ? (
-                  tempDate.to ? (
-                    <>
-                      {format(tempDate.from, "dd-MM-yy")}{" "}<span className="font-semibold text-primary">TO</span>{" "}{format(tempDate.to, "dd-MM-yy")}
-                    </>
+              <PopoverTrigger asChild>
+                <Button
+                  id="date"
+                  variant={"outline"}
+                  className={cn(
+                    "w-[300px] justify-start text-left font-normal min-h-10 flex-1 min-w-[300px] md:flex-none text-sm bg-gray-50",
+                    !tempDate && "text-muted-foreground"
+                  )}
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {tempDate?.from ? (
+                    tempDate.to ? (
+                      <>
+                        {format(tempDate.from, "dd-MM-yy")}{" "}<span className="font-semibold">TO</span>{" "}{format(tempDate.to, "dd-MM-yy")}
+                      </>
+                    ) : (
+                      format(tempDate.from, "dd-MM-yy")
+                    )
                   ) : (
-                    format(tempDate.from, "dd-MM-yy")
-                  )
-                ) : (
-                  <span>Pick a date range</span>
-                )}
-              </Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="start">
-              <Calendar
-                initialFocus
-                mode="range"
-                selected={tempDate}
-                onSelect={(selectedDate) => {
-                  setTempDate(selectedDate);
-                  if (selectedDate?.from && selectedDate?.to) {
-                    setIsCalendarOpen(false);
-                  }
-                }}
-                numberOfMonths={1}
-                disabled={{ after: new Date() }}
-              />
-            </PopoverContent>
+                    <span>Pick a date range</span>
+                  )}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0" align="start">
+                <Calendar
+                  initialFocus
+                  mode="range"
+                  selected={tempDate}
+                  onSelect={(selectedDate) => {
+                    setTempDate(selectedDate);
+                    if (selectedDate?.from && selectedDate?.to) {
+                      setIsCalendarOpen(false);
+                    }
+                  }}
+                  numberOfMonths={1}
+                  disabled={{ after: new Date() }}
+                />
+              </PopoverContent>
           </Popover>
           <Select value={tempFilter} onValueChange={setTempFilter}>
-            <SelectTrigger className="min-w-full md:min-w-0 md:w-[200px] bg-white font-normal min-h-12 text-sm lg:text-base flex-1 md:flex-none">
+            <SelectTrigger className="min-w-full md:min-w-0 md:w-[200px] font-normal min-h-10 text-sm flex-1 md:flex-none">
               <SelectValue placeholder="All" />
             </SelectTrigger>
             <SelectContent>
@@ -206,14 +214,13 @@ export default function AllIncomeView() {
             </SelectContent>
           </Select>
           <Button
-            variant="primary"
+            variant="secondary"
             onClick={handleApplyFilter}
-            className="min-h-12 font-normal text-sm lg:text-base"
+            className="min-h-10 text-sm"
           >
             Apply Filter
           </Button>
-          
-            <Button
+          <Button
               variant="outline"
               onClick={() => {
                 setTempDate(undefined);
@@ -222,78 +229,117 @@ export default function AllIncomeView() {
                 setSelectedFilter("ALL");
                 setCurrentPage(1);
               }}
-              className="min-h-12 font-normal text-sm lg:text-base"
+              className="min-h-10 text-sm"
             >
               Clear
             </Button>
-          
         </div>
-        <div className="overflow-auto w-full border-2 border-primary bg-card">
-          <Table className="lg:text-base">
-            <TableCaption className="hidden">
-              A list of your Leg.
-            </TableCaption>
-            <TableHeader className="bg-brand-2">
-              <TableRow>
-                <TableHead className="text-center text-black">Amount</TableHead>
-                <TableHead className="text-center text-black">Income Type</TableHead>
-                <TableHead className="text-center text-black">From</TableHead>
-                <TableHead className="text-center text-black">Date</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-            {isLoading ? (
-              <TableRow>
-                <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                  Loading...
-                </TableCell>
-              </TableRow>
-            ) :tableData.length > 0 ? (
-                tableData.map((item: TeamListItem, idx: number) => (
-                  <TableRow key={idx}>
-                    <TableCell className="text-center">{formatPrice(item.amount)}</TableCell>
-                    <TableCell className="text-center">
-                      {item?.rewardType === "ROI" && "PAMM Profit"}
-                      {item?.rewardType === "Referral" && "Introducer Bonus"}
-                      {item?.rewardType === "TEAM_ROI" && "Profit Sharing"}
-                      {item?.rewardType === "MATCHING_BONUS" && "IB Ranking Bonus"}
-                      {item?.rewardType === "MATCHING_REWARD_BONUS" && "IB Matching"}
-                      {item?.rewardType === "MONTHLY_ALLOWANCE" && "Monthly Allowance"}
-                      {item?.rewardType === "WEEKLY_ALLOWANCE" && "Weekly Allowance"}
-                      {item?.rewardType === "BILLIONAIR_CLUB" && "Billionaire Club"}
-                    </TableCell>
-                    <TableCell className="text-center">
-                      {/* {item.from? formatPrice(item.from) : ""} 
-                      
-                      ({item.receipt?.remark || "N/A" }) */}
+      </div>
+      </CardHeader>
+      <CardContent className="space-y-4 relative">
+      {isLoading ? (
+        <>
+        {Array.from({ length: 4 }).map((_,i) => (
+          <div key={i} className="p-4 rounded-xl transition-all duration-300 border ">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+              <Skeleton className="size-10 rounded-full" />
+              <div className="space-y-3">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[200px]" />
+              </div>
+              </div>
+              <div className="space-y-3">
+                <Skeleton className="h-4 w-[100px]" />
+                <Skeleton className="h-4 w-[50px] ml-auto" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+      ): (
+        <>
+      {tableData.length === 0 ? (
+        <div className="text-center py-12">
+        <History className="w-16 h-16 mx-auto mb-4 text-slate-600" />
+        <p className="text-slate-400">No transactions yet</p>
+        </div>
+      )
+      :
+      (
+        <>
+        {tableData.map((item: TeamListItem, index: number) => (
+        <div key={index} className="p-4 rounded-xl transition-all duration-300 border shadow-sm bg-gray-50 bg-gradient-to-b from-gray-50 to-brand-5/5">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-3">
+              <div className={`w-10 h-10 min-w-10 rounded-full flex items-center justify-center bg-gradient-to-br 
+              ${item?.rewardType === "ROI" && 'from-brand-1 to-brand-2'}
+              ${item?.rewardType === "Referral" && 'from-brand-4 to-brand-5'}
+              ${item?.rewardType === "TEAM_ROI" && 'from-brand-1 to-brand-2'}
+              ${item?.rewardType === "MATCHING_BONUS" && 'from-brand-2 to-brand-3'}
+              ${item?.rewardType === "MATCHING_REWARD_BONUS" && 'from-brand-4 to-brand-5'}
+              ${item?.rewardType === "MONTHLY_ALLOWANCE" && 'from-brand-1 to-brand-5'}
+              ${item?.rewardType === "WEEKLY_ALLOWANCE" && 'from-brand-1 to-brand-5'}
+              ${item?.rewardType === "BILLIONAIR_CLUB" && 'from-brand-2 to-brand-3'}
+              `}>
+                {item?.rewardType === "ROI" && (<Users className="size-5 text-white" />)}
+                {item?.rewardType === "Referral" && (<Gift className="size-5 text-white" />)}
+                {item?.rewardType === "TEAM_ROI" && (<ChartSpline className="size-5 text-white" />)}
+                {item?.rewardType === "MATCHING_BONUS" && (<Sparkle className="size-5 text-white" />)}
+                {item?.rewardType === "MATCHING_REWARD_BONUS" && (<GitFork className="size-5 text-white" />)}
+                {item?.rewardType === "MONTHLY_ALLOWANCE" && (<CalendarArrowUp className="size-5 text-white" />)}
+                {item?.rewardType === "WEEKLY_ALLOWANCE" && (<CalendarArrowUp className="size-5 text-white" />)}
+                {item?.rewardType === "BILLIONAIR_CLUB" && (<Wallet className="size-5 text-white" />)}
+                {/* {item.transactionType === 'DEPOSIT' ? (
+                  <ArrowDownCircle className="w-5 h-5 text-emerald-400" />
+                ) : (
+                  <ArrowUpCircle className="w-5 h-5 text-red-400" />
+                )} */}
+              </div>
+              <div>
+                <p className="text-sm md:text-base font-semibold capitalize">
+                {item?.rewardType === "ROI" && "PAMM Profit"}
+                {item?.rewardType === "Referral" && "Introducer Bonus"}
+                {item?.rewardType === "TEAM_ROI" && "Profit Sharing"}
+                {item?.rewardType === "MATCHING_BONUS" && "IB Ranking Bonus"}
+                {item?.rewardType === "MATCHING_REWARD_BONUS" && "IB Matching"}
+                {item?.rewardType === "MONTHLY_ALLOWANCE" && "Monthly Allowance"}
+                {item?.rewardType === "WEEKLY_ALLOWANCE" && "Weekly Allowance"}
+                {item?.rewardType === "BILLIONAIR_CLUB" && "Billionaire Club"}
+                </p>
+                {item.receipt?.remark && (<p className="hidden md:block text-xs font-medium text-brand-5/80 break-all mt-1">{item.receipt?.remark}</p>)}
+                <p className="text-xs font-medium text-brand-5/60 mt-1">{format(new Date(item.createdAt), 'MMM dd, yyyy HH:mm')}</p>
+              </div>
+            </div>
+            <div className="text-right whitespace-nowrap">
+              <p className="text-base md:text-lg font-bold text-brand-3">{formatPrice(item.amount || 0)}</p>
+              {/* <p className={`text-lg font-bold ${
+                item.transactionType === 'DEPOSIT' ? 'text-brand-3' : 'text-destructive'
+              }`}>
+                {item.transactionType === 'DEPOSIT' ? '+' : '-'} {formatPrice(item.amount || 0)}
+              </p>
+              {item.transactionFee !== 0 && (
+              <p className="text-sm font-semibold text-brand-5/60">Fee: {formatPrice(item.transactionFee || 0)}</p>
+              )} */}
+            </div>
+          </div>
+        </div>
+      ))}
 
-                      {item?.senderUserData?.nickName ? `${item?.senderUserData?.nickName}` : item?.from ? `${item?.from}` : ""}
-                      {item?.amountType === "ROI" && item?.receipt?.remark && (
-                        <span> ({item?.receipt?.remark})</span>
-                      )}
-                      </TableCell>
-                    <TableCell className="text-center">{item.createdAt ? format(new Date(item.createdAt), 'dd-MM-yy  |  HH:mm a') : '-'}</TableCell>
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell colSpan={4} className="text-center py-8 text-muted-foreground">
-                  No data found
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-        </div>
-        {paginationMeta.total_page > 1 && (
-          <Pagination
+      {paginationMeta.total_page > 1 && (
+        <Pagination
           currentPage={currentPage}
           totalPages={paginationMeta.total_page}
           onPageChange={handlePageChange}
           className="mt-4"
         />
-        )}
-      </div>
+      )}
+      </>
+      )}
+      </>
+      )}
+      </CardContent>
+      </Card>
     </>
   );
 }

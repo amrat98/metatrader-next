@@ -71,9 +71,9 @@ export const Pagination: React.FC<PaginationProps> = ({
               }
             }}
             placeholder={`Page...`}
-            className="h-9 no-spinner"
+            className="h-9 no-spinner text-sm"
           />
-          <Button onClick={handleGoToPage} size="sm">Go</Button>
+          <Button onClick={handleGoToPage} size="sm" className="text-sm bg-brand-5 hover:bg-brand-5/80">Go</Button>
         </div>
         <p className="text-xs text-muted-foreground text-center mt-2">
           Total: {totalPages} pages

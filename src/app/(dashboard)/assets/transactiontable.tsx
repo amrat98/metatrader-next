@@ -16,7 +16,9 @@ import { Pagination } from "@/components/pagination";
 import { formatPrice } from "@/lib/utils";
 import { UserContext } from "@/lib/usercontent";
 import { apiConfig } from "@/lib/api-config";
-import { Copy } from "lucide-react";
+import { ArrowRight, ArrowDownCircle, ArrowUpCircle, Copy, History, LoaderCircle } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton"
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Tooltip,
@@ -31,6 +33,7 @@ import {
   SelectContent,
   SelectItem,
 } from "@/components/ui/select";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 interface TransactionData {
   id: string;
@@ -128,125 +131,173 @@ export default function TransitionTable() {
 
   return (
     <>
-    <div className="mt-2 mb-4 flex-1 text-right flex flex-nowrap items-center justify-end gap-5">
-      <label htmlFor="transaction-type-select" className="mr-2 font-medium text-sm lg:text-base">Transaction Type:</label>
-        <Select
-          value={selectedType}
-          onValueChange={value => {
-            setSelectedType(value);
-            setCurrentPage(1);
-            setPaginationMeta(prev => ({ ...prev, current_page: 1 }));
-          }}
-        >
-          <SelectTrigger id="transaction-type-select" className="w-[200px] font-normal min-h-12 text-sm lg:text-base bg-white  border rounded px-2 py-2">
-            <SelectValue placeholder="All" />
-          </SelectTrigger>
-          <SelectContent>
-            {transactionTypeOptions.map(option => (
-              <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-    </div>
-      <div className="overflow-auto w-full border-2 border-primary bg-card">
-        <Table className="lg:text-base">
-          <TableCaption className="hidden">
-            A list of your transactions.
-          </TableCaption>
-          <TableHeader className="bg-brand-2">
-            <TableRow className="border-brand-1/50">
-              <TableHead className="text-center text-black">Transaction ID</TableHead>
-              <TableHead className="text-center text-black">Transaction Type</TableHead>
-              <TableHead className="text-center text-black">Amount</TableHead>
-              <TableHead className="text-center text-black">Transaction Fees</TableHead>
-              <TableHead className="text-center text-black">Mode</TableHead>
-              <TableHead className="text-center text-black">Status</TableHead>
-              <TableHead className="text-center text-black">From Address</TableHead>
-              <TableHead className="text-center text-black">To Address</TableHead>
-              <TableHead className="text-center text-black">Date & Time</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-          {isLoading ? (
-              <TableRow>
-                <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
-                  Loading...
-                </TableCell>
-              </TableRow>
-            ) : tableData.length > 0 ? (
-              tableData.map((item, index) => (
-                <TableRow key={`${item.id}-${index}`}>
-                  <TableCell className="text-center">{item.transactionId || "-"}</TableCell>
-                  <TableCell className="text-center">{item.transactionType || "-"}</TableCell>
-                  <TableCell className="text-center">{formatPrice(item.amount || 0)}</TableCell>
-                  <TableCell className="text-center">{formatPrice(item.transactionFee || 0)}</TableCell>
-                  <TableCell className="text-center">{item.mode || "WALLET"}</TableCell>
-                  <TableCell className="text-center">{item.status || "-"}</TableCell>
-                  <TableCell className="text-center relative">
-                    {item.formAddress ? (
-                      <div className="flex items-center justify-center gap-2">
-                        <span>{/\d/.test(item.formAddress) ? `${item.formAddress.slice(0, 10)}...` : item.formAddress}</span>
-                        {/\d/.test(item.formAddress) ? (
-                        <TooltipProvider>
-                          <Tooltip open={copiedKey === `from-${index}`}>
-                            <TooltipTrigger asChild>
-                              <Button
-                                onClick={() => handleCopyAddress(item.formAddress, `from-${index}`)}
-                                variant="link"
-                                size="icon"
-                                className="size-6 shrink-0 cursor-pointer"
-                              >
-                                <Copy className="size-4" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              Copied!
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                        ) : ""}
-                      </div>
-                    ) : "-"}
-                  </TableCell>
-                  <TableCell className="text-center relative">
-                    {item.toAddress ? (
-                      <div className="flex items-center justify-center gap-2">
-                        <span>{/\d/.test(item.toAddress) ? `${item.toAddress.slice(0, 10)}...` : item.toAddress}</span>
-                        {/\d/.test(item.toAddress) ? (
-                        <TooltipProvider>
-                          <Tooltip open={copiedKey === `to-${index}`}>
-                            <TooltipTrigger asChild>
-                            <Button
-                                onClick={() => handleCopyAddress(item.toAddress, `to-${index}`)}
-                                variant="link"
-                                size="icon"
-                                className="size-6 shrink-0 cursor-pointer"
-                              >
-                                <Copy className="size-4" />
-                              </Button>
-                            </TooltipTrigger>
-                            <TooltipContent>
-                              Copied!
-                            </TooltipContent>
-                          </Tooltip>
-                        </TooltipProvider>
-                        ) : ""}
-                      </div>
-                    ) : "-"}
-                  </TableCell>
-                  <TableCell className="text-center">{item.createdAt ? format(new Date(item.createdAt), 'dd-MM-yy  |  HH:mm a') : '-'}</TableCell>
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell colSpan={9} className="text-center py-8 text-muted-foreground">
-                No transaction details found.
-                </TableCell>
-              </TableRow>
+    <Card>
+      <CardHeader>
+        <div className="flex flex-wrap gap-5 justify-between">
+        <div>
+        <CardTitle className="text-brand-3 text-lg lg:text-2xl font-bold">Transaction History</CardTitle>
+        <CardDescription className="text-slate-400 font-medium">Your recent deposits and withdrawals</CardDescription>
+        </div>
+        <div className="mt-2 mb-4 text-right flex flex-nowrap items-center gap-2">
+          <label htmlFor="transaction-type-select" className="font-medium text-sm">Transaction Type:</label>
+            <Select
+              value={selectedType}
+              onValueChange={value => {
+                setSelectedType(value);
+                setCurrentPage(1);
+                setPaginationMeta(prev => ({ ...prev, current_page: 1 }));
+              }}
+            >
+              <SelectTrigger id="transaction-type-select" className="w-[150px] md:w-[200px] font-normal min-h-10 bg-gray-50 text-sm px-2 py-2">
+                <SelectValue placeholder="All" />
+              </SelectTrigger>
+              <SelectContent>
+                {transactionTypeOptions.map(option => (
+                  <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+        </div>
+        </div>
+      </CardHeader>
+      <CardContent className="space-y-4 relative">
+      {isLoading ? (
+        <>
+        {Array.from({ length: 4 }).map((_,i) => (
+          <div key={i} className="p-4 rounded-xl transition-all duration-300 border ">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+              <Skeleton className="size-10 rounded-full" />
+              <div className="space-y-3">
+                <Skeleton className="h-4 w-[250px]" />
+                <Skeleton className="h-4 w-[200px]" />
+              </div>
+              </div>
+              <div className="space-y-3">
+                <Skeleton className="h-4 w-[100px]" />
+                <Skeleton className="h-4 w-[50px] ml-auto" />
+              </div>
+            </div>
+          </div>
+        ))}
+      </>
+      ): (
+        <>
+      {tableData.length === 0 ? (
+        <div className="text-center py-12">
+        <History className="w-16 h-16 mx-auto mb-4 text-slate-600" />
+        <p className="text-slate-400">No transactions yet</p>
+        </div>
+      )
+      :
+      (
+        <>
+        {tableData.map((item, index) => (
+        <div key={`${item.id}-${index}`} className="p-4 rounded-xl transition-all duration-300 border shadow-sm bg-gray-50">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
+                item.transactionType === 'DEPOSIT'
+                  ? 'bg-emerald-500/20'
+                  : 'bg-red-500/20'
+              }`}>
+                {item.transactionType === 'DEPOSIT' ? (
+                  <ArrowDownCircle className="w-5 h-5 text-emerald-400" />
+                ) : (
+                  <ArrowUpCircle className="w-5 h-5 text-red-400" />
+                )}
+              </div>
+              <div>
+                <p className="font-semibold capitalize">{item.transactionType.toLowerCase()}</p>
+                <p className="text-xs font-medium text-brand-5/60">{format(new Date(item.createdAt), 'MMM dd, yyyy HH:mm')}</p>
+              </div>
+            </div>
+            <div className="text-right">
+              <p className={`text-lg font-bold ${
+                item.transactionType === 'DEPOSIT' ? 'text-brand-3' : 'text-destructive'
+              }`}>
+                {item.transactionType === 'DEPOSIT' ? '+' : '-'} {formatPrice(item.amount || 0)}
+              </p>
+              {item.transactionFee !== 0 && (
+              <p className="text-sm font-semibold text-brand-5/60">Fee: {formatPrice(item.transactionFee || 0)}</p>
+              )}
+              {/* <Badge variant={item.status === 'COMPLETED' ? 'default' : 'secondary'} className="text-xs">
+                {item.status}
+              </Badge> */}
+            </div>
+          </div>
+          {item.formAddress || item.toAddress ? (
+          <div className="flex flex-wrap gap-4 text-sm mt-3">
+            {item.formAddress && (
+            <div>
+              <p className="text-brand-5/60">From</p>
+              {item.formAddress.length >= 20 ? (
+                <>
+                <p className="text-brand-5 font-mono">{item.formAddress.slice(0, 10)}... 
+                <TooltipProvider>
+                  <Tooltip open={copiedKey === `from-${index}`}>
+                    <TooltipTrigger asChild>
+                      <Button
+                        onClick={() => handleCopyAddress(item.formAddress, `from-${index}`)}
+                        variant="link"
+                        size="icon"
+                        className="size-7 shrink-0 cursor-pointer text-brand-5 bg-brand-4/20"
+                      >
+                        <Copy className="size-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      Copied!
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                </p>
+                </>
+              ) : (
+              <p className="text-brand-5 font-mono">{item.formAddress}</p>
+              )}
+            </div>
             )}
-          </TableBody>
-        </Table>
-      </div>
+            {item.formAddress && item.toAddress && (
+            <div className="hidden md:block">
+              <ArrowRight className="text-brand-5/60" />
+            </div>
+            )}
+            {item.toAddress && (
+            <div>
+            <p className="text-brand-5/60">To</p>
+            {item.toAddress.length >= 20 ? (
+              <>
+                <p className="text-brand-5 font-mono">{item.toAddress.slice(0, 10)}...
+                <TooltipProvider>
+                  <Tooltip open={copiedKey === `from-${index}`}>
+                    <TooltipTrigger asChild>
+                      <Button
+                        onClick={() => handleCopyAddress(item.toAddress, `from-${index}`)}
+                        variant="link"
+                        size="icon"
+                        className="size-7 shrink-0 cursor-pointer text-brand-5 bg-brand-4/20"
+                      >
+                        <Copy className="size-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      Copied!
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                </p>
+                </>
+              ) : (
+              <p className="text-brand-5 font-mono">{item.toAddress}</p>
+              )}
+            </div>
+            )}
+          </div>
+          ): ("")}
+        </div>
+      ))}
+
       {paginationMeta.total_page > 1 && (
         <Pagination
           currentPage={currentPage}
@@ -255,6 +306,12 @@ export default function TransitionTable() {
           className="mt-4"
         />
       )}
+      </>
+      )}
+      </>
+      )}
+      </CardContent>
+    </Card>
     </>
   );
 }

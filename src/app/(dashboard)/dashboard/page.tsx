@@ -16,7 +16,7 @@ import { UserContext } from "@/lib/usercontent";
 import { cn, formatPrice } from "@/lib/utils";
 import { format } from "date-fns";
 import CreditCard from "./creditcard"; 
-import { Sparkle, User, ChartSpline, GitFork, Waypoints, WalletIcon, CalendarArrowUp } from "lucide-react";
+import { Sparkle, User, ChartSpline, GitFork, Waypoints, WalletIcon, CalendarArrowUp, PiggyBank, BanknoteArrowUp, BanknoteArrowDown, Users, BicepsFlexed, Snail, } from "lucide-react";
 
 
 
@@ -525,6 +525,125 @@ export default function Dashboard() {
             </div>
           </div> */}
 
+          <div className="relative  col-span-1 md:col-span-2 xl:col-span-3">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-brand-5 text-lg lg:text-2xl font-bold">{data.wallet.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="border border-b-4 border-brand-5/30 rounded-xl flex flex-col gap-2 p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-3 to-brand-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <WalletIcon className="w-5 h-5 text-white" />
+                        </div>
+                        <CardTitle className="text-brand-5 text-lg">{data.wallet.asset_title}</CardTitle>
+                      </div>
+                      <BanknoteArrowDown className="size-6 text-brand-3" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold bg-gradient-to-r from-brand-3 to-brand-5 bg-clip-text text-transparent">
+                        {formatPrice(data.wallet.asset_price.toString())}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border border-b-4 border-brand-5/30 rounded-xl flex flex-col gap-2 p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-3 to-brand-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <WalletIcon className="w-5 h-5 text-white" />
+                        </div>
+                        <CardTitle className="text-brand-5 text-lg">{data.wallet.income_title}</CardTitle>
+                      </div>
+                      <BanknoteArrowUp className="size-6 text-brand-3" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold bg-gradient-to-r from-brand-3 to-brand-5 bg-clip-text text-transparent">
+                        {formatPrice(data.wallet.income_price.toString())}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border border-b-4 border-brand-5/30 rounded-xl flex flex-col gap-2 p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-3 to-brand-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <WalletIcon className="w-5 h-5 text-white" />
+                        </div>
+                        <CardTitle className="text-brand-5 text-lg">{data.wallet.contribution_title}</CardTitle>
+                      </div>
+                      <User className="size-6 text-brand-3" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold bg-gradient-to-r from-brand-3 to-brand-5 bg-clip-text text-transparent">
+                      {formatPrice(data.wallet.contribution_price.toString())}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="relative  col-span-1 md:col-span-2 xl:col-span-3">
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-brand-1 text-lg lg:text-2xl font-bold">{data.team.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="border border-b-4 border-brand-1/60 rounded-xl flex flex-col gap-2 p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-1 to-brand-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <Users className="w-5 h-5 text-white" />
+                        </div>
+                        <CardTitle className="text-brand-5 text-lg">{data.team.strong_title}</CardTitle>
+                      </div>
+                      <BicepsFlexed className="size-8 text-brand-1" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold bg-gradient-to-r from-brand-1 to-brand-2 bg-clip-text text-transparent">
+                        {formatPrice(data.team.strong_price.toString())}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="border border-b-4 border-brand-1/60 rounded-xl flex flex-col gap-2 p-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-1 to-brand-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <User className="w-5 h-5 text-white" />
+                        </div>
+                        <CardTitle className="text-brand-5 text-lg">{data.team.weaker_title}</CardTitle>
+                      </div>
+                      <Snail className="size-6 text-brand-1/60" />
+                    </div>
+                    <div>
+                      <p className="text-2xl font-bold bg-gradient-to-r from-brand-1 to-brand-2 bg-clip-text text-transparent">
+                        {formatPrice(data.team.weaker_price.toString())}
+                      </p>
+                    </div>
+                  </div>
+                  
+                </div>
+                <div className="flex flex-wrap justify-evenly gap-4 mt-4 border-2 border-brand-5  border-b-5 shadow-xs rounded-lg p-3">
+                  <div className="flex gap-5 items-center">
+                    <div className="text-lg font-semibold text-brand-5/70">{data.team.total_title}:</div>
+                    <div className="text-2xl font-bold text-brand-5">{data.team.total_direct}</div>
+                  </div>
+                  <div className="flex gap-5 items-center">
+                    <div className="text-lg font-semibold text-brand-5/70">{data.team.active_title}:</div>
+                    <div className="text-2xl font-bold text-brand-5">{data.team.active_direct}</div>
+                  </div>
+                  <div className="flex gap-5 items-center">
+                    <div className="text-lg font-semibold text-brand-5/70">{data.team.team_title}:</div>
+                    <div className="text-2xl font-bold text-brand-5">{data.team.total_team}</div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+{/* 
             <div className="relative  col-span-1 md:col-span-2 xl:col-span-3">
           <div
             className={`${cardStyle} custom-card flex flex-col! md:flex-row! items-stretch`}
@@ -659,7 +778,7 @@ export default function Dashboard() {
               </div>
             </div>
           </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
