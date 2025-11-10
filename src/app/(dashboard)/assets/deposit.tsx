@@ -53,14 +53,14 @@ export default function Deposit() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-brand-5 text-lg lg:text-2xl font-bold">Deposit USDT</CardTitle>
+        <CardTitle className="text-white text-lg lg:text-2xl font-bold">Deposit USDT</CardTitle>
         <CardDescription className="text-slate-400 font-medium">Deposit USDT to your trading wallet (BEP20 Network)</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
-        <div className="rounded-xl space-y-3">
-          <p className="text-sm font-medium">Your Deposit Address</p>
+        <div className="p-4 rounded-xl meta-border meta-shine space-y-3">
+          <p className="text-sm font-medium text-brand-1">Your Deposit Address</p>
           <div className="flex items-stretch gap-2">
-            <code className="flex-1 text-base font-mono text-brand-3 font-bold p-3 rounded-lg overflow-x-auto border-2 bg-accent/40">
+            <code className="flex-1 text-base font-mono text-white font-bold p-3 rounded-lg overflow-x-auto border-2 bg-slate-950">
               {depositAddress}
             </code>
             <TooltipProvider>
@@ -98,24 +98,24 @@ export default function Deposit() {
             />
           </div>
           <div className="w-full p-3 rounded-lg border-2 border-accent">
-            <p className="text-sm font-medium text-brand-5 mb-1 text-center">Scan this QR code or copy address</p>
-            <code className="text-base font-mono font-bold text-brand-3 break-all block text-center">
+            <p className="text-sm font-medium text-muted-foreground mb-1 text-center">Scan this QR code or copy address</p>
+            <code className="text-base font-mono font-bold text-white break-all block text-center">
               {depositAddress}
             </code>
           </div>
-          <Button
+          {/* <Button
             // onClick={downloadQR}
             variant="secondary"
             className=""
           >
             <Download className="size-5" />
             Download
-          </Button>
+          </Button> */}
         </>
         )}
         </div>
-        <div className="p-4 rounded-lg bg-brand-2/30 border border-brand-1/50 mt-10">
-          <p className="text-sm text-brand-1 font-semibold mb-2">Important Notes:</p>
+        <div className="p-4 rounded-lg bg-extra-1/20 border border-extra-1/50 mt-10">
+          <p className="text-sm text-extra-1 font-semibold mb-2">Important Notes:</p>
           <p className="text-xs mb-1">Ensure you use BEP20 to deposit or assets might be lost</p>
           <ul className="text-xs space-y-1 list-disc list-inside">
             <li>Please do not deposit any non-USDT assets to the assess above.</li>

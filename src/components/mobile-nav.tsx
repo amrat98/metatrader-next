@@ -5,7 +5,8 @@ import { usePathname } from "next/navigation";
 import { routes } from "@/lib/routes";
 import Link from "next/link";
 import {
-  House, Network, BanknoteArrowDown, BanknoteArrowUp, Wallet, Headset, CreditCard
+  House, Network, BanknoteArrowDown, BanknoteArrowUp, Wallet, Headset, CreditCard,
+  User
 } from "lucide-react";
   
   const data = {
@@ -20,16 +21,16 @@ import {
         url: `${routes.team}`,
         icon: Network,
       },
-      {
-        title: "My Investment",
-        url: `${routes.investment}`,
-        icon: BanknoteArrowDown,
-      },
-      {
-        title: "My Income",
-        url: `${routes.income}`,
-        icon: BanknoteArrowUp,
-      },
+      // {
+      //   title: "My Investment",
+      //   url: `${routes.investment}`,
+      //   icon: BanknoteArrowDown,
+      // },
+      // {
+      //   title: "My Income",
+      //   url: `${routes.income}`,
+      //   icon: BanknoteArrowUp,
+      // },
       {
         title: "Assets",
         url: `${routes.assets}`,
@@ -40,11 +41,16 @@ import {
         url: `${routes.subscription}`,
         icon: CreditCard,
       },
+      // {
+      //   title: "Support",
+      //   url: `${routes.support}`,
+      //   icon: Headset,
+      // },
       {
-        title: "Support",
-        url: `${routes.support}`,
-        icon: Headset,
-      },
+        title: "My Profile",
+        url: `${routes.profile}`,
+        icon: User,
+      }
     ],
   };
 

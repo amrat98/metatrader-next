@@ -251,12 +251,12 @@ export default function MatchingRewardView() {
         <>
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
         {Array.from({ length: 4 }).map((_,i) => (
-          <div key={i} className="p-4 rounded-xl transition-all duration-300 border bg-white shadow">
+          <div key={i} className="p-4 rounded-xl transition-all duration-300 border meta-border">
             <div className="flex flex-col space-y-3">
-              <Skeleton className="w-full aspect-video rounded-xl" />
+              <Skeleton className="w-full aspect-video rounded-xl bg-brand-1/30" />
               <div className="space-y-2">
-                <Skeleton className="h-4 w-full" />
-                <Skeleton className="h-4 w-2/3" />
+                <Skeleton className="h-4 w-full bg-brand-1/30" />
+                <Skeleton className="h-4 w-2/3 bg-brand-1/30" />
               </div>
             </div>
           </div>
@@ -278,12 +278,12 @@ export default function MatchingRewardView() {
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <CardTitle className="text-brand-5 text-lg">{item.reward}</CardTitle>
-                  <div className="text-xs text-brand-5/60 font-medium">
+                  <CardTitle className="text-brand-5 text-lg text-white">{item.reward}</CardTitle>
+                  <div className="text-xs text-muted-foreground font-medium">
                     Created {format(new Date(item.createdAt), 'MMM dd, yyyy')}
                   </div>
                 </div>
-                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-4 to-brand-5 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-extra-4 to-extra-5 flex items-center justify-center group-hover:scale-110 transition-transform">
                   {item.reward === 'Tablet' ? <Tablet className="w-5 h-5 text-white" />
                   : item.reward === 'Laptop' ? <Laptop className="w-5 h-5 text-white" />
                   : item.reward === 'Dubai Tour' ? <Plane className="w-5 h-5 text-white" />
@@ -297,13 +297,13 @@ export default function MatchingRewardView() {
               </div>
             </CardHeader>
             <CardContent>
-              <div className="p-2 rounded-lg border border-brand-5/30 space-y-2 mb-3">
+              <div className="p-2 rounded-lg meta-shine meta-border space-y-2 mb-3">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-brand-5/60">Target</span>
-                  <span className="text-sm font-medium text-brand-3">{formatPrice(item?.matchAmout,2)}</span>
+                  <span className="text-xs font-medium text-muted-foreground">Target</span>
+                  <span className="text-sm font-semibold text-emerald-400">{formatPrice(item?.matchAmout,2)}</span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-medium text-brand-5/60">Required</span>
+                  <span className="text-xs font-medium text-muted-foreground">Required</span>
                   {(() => {
                       const hasTeam = teamComposition && typeof teamComposition.CMRV === 'number';
                       const matchAmount = item?.matchAmout ?? 0;
@@ -312,7 +312,7 @@ export default function MatchingRewardView() {
 
                       if (hasTeam && (CMRV >= matchAmount || matchLot - CMRV >= matchAmount)) {
                         return (
-                          <span className="text-sm font-medium text-brand-3">
+                          <span className="text-sm font-semibold text-emerald-400">
                           {formatPrice(matchAmount,2)}
                           </span>
                         );
@@ -346,7 +346,7 @@ export default function MatchingRewardView() {
                 {isLoading ? "Claiming..." : "Claim Reward" }
                 </Button>
               ) : (
-                <Button className="text-sm cursor-not-allowed pointer-events-none w-full shadow-md shadow-brand-5/20" variant="outline">Pending</Button>
+                <Button className="text-sm cursor-not-allowed pointer-events-none w-full bg-brand-1/20!" variant="outline">Pending</Button>
               )}
             </CardContent>
           </Card>

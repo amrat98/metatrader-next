@@ -2,11 +2,11 @@
 
 import { AppSidebar } from "@/components/app-sidebar";
 import { MobileNav } from "@/components/mobile-nav";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { DashboardHeader } from "@/components/dashboard-header";
 import UserContextProvider from "@/lib/usercontent";
 import { useEffect, useState } from "react";
-import { ArrowUp } from "lucide-react";
+import { ArrowUp, Gem } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function AdminLayout({
@@ -30,11 +30,24 @@ export default function AdminLayout({
 
   return (
     <UserContextProvider>
-      <SidebarProvider className="bg-accent">
+      <SidebarProvider className="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 meta-gradient">
         <AppSidebar />
-        <SidebarInset className="bg-transparent pb-20">
+        <SidebarInset className="bg-transparent pt-0 pb-10 lg:pt-6 lg:pb-6">
           <main className="h-full">
-            <DashboardHeader />
+            {/* <DashboardHeader /> */}
+            <div className="flex justify-between items-center gap-3 px-4 py-6 lg:hidden">
+            <SidebarTrigger className="min-w-10 lg:min-w-0 lg:-ml-1 cursor-pointer meta-border meta-shine aspect-square h-auto" />
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-brand-1 to-brand-2 flex items-center justify-center shadow-[0_0_20px_rgba(185,242,255,.15)]">
+                <Gem className="w-6 h-6 text-black" />
+              </div>
+              <div>
+                <h1 className="font-bold text-lg bg-gradient-to-r from-brand-1 to-brand-2 bg-clip-text text-transparent">MetaTrader</h1>
+                <p className="text-xs text-muted-foreground">Premium Trading</p>
+              </div>
+            </div>
+            <div className="min-w-10"></div>
+            </div>
             <div className=" xl:max-w-7xl mx-auto">{children}</div>
             {showScroll && (
             <Button

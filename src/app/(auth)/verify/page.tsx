@@ -46,7 +46,7 @@ const otpInputStyles = {
   separator: "mx-2",
   container: "gap-4",
   formItem: "flex flex-col items-center mt-4",
-  label: "text-base mb-4 hidden",
+  label: "text-sm font-medium text-slate-300 mb-4 hidden",
   message: "text-sm mt-2",
 } as const;
 
@@ -164,12 +164,12 @@ function VerifyFormContent() {
 
   return (
     <>
-      <Card className="w-full text-left backdrop-blur-md bg-card/60">
+      <Card className="w-full text-left bg-brand-3 backdrop-blur-xl shadow-[0_0_20px_rgba(185,242,255,.15)]">
         <CardHeader className="text-center">
           <CardTitle>
             <h1 className="text-2xl">Verify OTP</h1>
           </CardTitle>
-          <CardDescription className="text-foreground text-base mt-1">
+          <CardDescription className="text-muted-foreground text-base mt-1">
             <p>Enter the 6-digit code sent to your email</p>
           </CardDescription>
         </CardHeader>
@@ -235,7 +235,7 @@ function VerifyFormContent() {
                   variant: "primary",
                   size: "xl",
                   textSize: "xl",
-                  className: "w-full cursor-pointer mt-8",
+                  className: "w-full cursor-pointer mt-8 transition-all duration-300 bg-gradient-to-r from-brand-1 to-brand-2 hover:from-brand-2 hover:to-brand-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(185,242,255,.15)]",
                 })}
                 disabled={isLoading}
               >
@@ -271,6 +271,19 @@ function VerifyFormContent() {
             {otpLoading ? "Sending..." : "Resend OTP"}
           </Link>
         )}
+      </p>
+      <p className="text-base mt-5">
+        Remember your password?{" "}
+        <Link
+          href={routes.login}
+          className={buttonVariants({
+            variant: "link",
+            size: null,
+            textSize: null,
+          })}
+        >
+          Sign In
+        </Link>
       </p>
 
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>

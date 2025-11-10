@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="en" className={`${poppins.className}`}>
+    <html lang="en" className={`dark ${poppins.className}`}>
       <body className="antialiased"> 
         {children}
         <Toaster position="top-center" theme="light" />

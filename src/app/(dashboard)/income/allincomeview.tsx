@@ -159,7 +159,7 @@ export default function AllIncomeView() {
       <CardHeader>
       <div className="flex flex-wrap gap-5 justify-between">
         <div>
-        <CardTitle className="text-brand-3 text-lg lg:text-2xl font-bold">Earnings History</CardTitle>
+        <CardTitle className="text-white text-lg lg:text-2xl font-bold">Earnings History</CardTitle>
         <CardDescription className="text-slate-400 font-medium">Referral bonuses and rewards</CardDescription>
         </div>
         <div className="mt-2 mb-4 text-right flex flex-wrap items-center gap-2">
@@ -240,21 +240,21 @@ export default function AllIncomeView() {
       {isLoading ? (
         <>
         {Array.from({ length: 4 }).map((_,i) => (
-          <div key={i} className="p-4 rounded-xl transition-all duration-300 border ">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-3">
-              <Skeleton className="size-10 rounded-full" />
-              <div className="space-y-3">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
-              </div>
-              </div>
-              <div className="space-y-3">
-                <Skeleton className="h-4 w-[100px]" />
-                <Skeleton className="h-4 w-[50px] ml-auto" />
+          <div key={i} className="p-4 rounded-xl transition-all duration-300 meta-border meta-shine">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3 flex-1">
+              <Skeleton className="min-w-8 size-8 lg:size-10 rounded-full bg-brand-1/30" />
+              <div className="space-y-3 flex-1">
+                <Skeleton className="h-4 w-[250px] max-w-8/12 bg-brand-1/30" />
+                <Skeleton className="h-4 w-[200px] max-w-5/12 bg-brand-1/30" />
               </div>
             </div>
+            <div className="space-y-3 hidden lg:block">
+              <Skeleton className="h-4 w-[100px] max-w-full bg-brand-1/30" />
+              <Skeleton className="h-4 w-[50px] max-w-full ml-auto bg-brand-1/30" />
+            </div>
           </div>
+        </div>
         ))}
       </>
       ): (
@@ -269,18 +269,18 @@ export default function AllIncomeView() {
       (
         <>
         {tableData.map((item: TeamListItem, index: number) => (
-        <div key={index} className="p-4 rounded-xl transition-all duration-300 border shadow-sm bg-gray-50 bg-gradient-to-b from-gray-50 to-brand-5/5">
+        <div key={index} className="p-4 rounded-xl transition-all duration-300 border shadow-sm  meta-border meta-shine hover:meta-glow">
           <div className="flex items-center justify-between gap-2">
             <div className="flex items-center gap-3">
               <div className={`w-10 h-10 min-w-10 rounded-full flex items-center justify-center bg-gradient-to-br 
-              ${item?.rewardType === "ROI" && 'from-brand-1 to-brand-2'}
-              ${item?.rewardType === "Referral" && 'from-brand-4 to-brand-5'}
-              ${item?.rewardType === "TEAM_ROI" && 'from-brand-1 to-brand-2'}
-              ${item?.rewardType === "MATCHING_BONUS" && 'from-brand-2 to-brand-3'}
-              ${item?.rewardType === "MATCHING_REWARD_BONUS" && 'from-brand-4 to-brand-5'}
-              ${item?.rewardType === "MONTHLY_ALLOWANCE" && 'from-brand-1 to-brand-5'}
-              ${item?.rewardType === "WEEKLY_ALLOWANCE" && 'from-brand-1 to-brand-5'}
-              ${item?.rewardType === "BILLIONAIR_CLUB" && 'from-brand-2 to-brand-3'}
+              ${item?.rewardType === "ROI" && 'from-extra-1 to-extra-2'}
+              ${item?.rewardType === "Referral" && 'from-extra-4 to-extra-5'}
+              ${item?.rewardType === "TEAM_ROI" && 'from-extra-1 to-extra-2'}
+              ${item?.rewardType === "MATCHING_BONUS" && 'from-extra-2 to-extra-3'}
+              ${item?.rewardType === "MATCHING_REWARD_BONUS" && 'from-extra-4 to-extra-5'}
+              ${item?.rewardType === "MONTHLY_ALLOWANCE" && 'from-extra-1 to-extra-5'}
+              ${item?.rewardType === "WEEKLY_ALLOWANCE" && 'from-extra-1 to-extra-5'}
+              ${item?.rewardType === "BILLIONAIR_CLUB" && 'from-extra-2 to-extra-3'}
               `}>
                 {item?.rewardType === "ROI" && (<Users className="size-5 text-white" />)}
                 {item?.rewardType === "Referral" && (<Gift className="size-5 text-white" />)}
@@ -307,12 +307,12 @@ export default function AllIncomeView() {
                 {item?.rewardType === "WEEKLY_ALLOWANCE" && "Weekly Allowance"}
                 {item?.rewardType === "BILLIONAIR_CLUB" && "Billionaire Club"}
                 </p>
-                {item.receipt?.remark && (<p className="hidden md:block text-xs font-medium text-brand-5/80 break-all mt-1">{item.receipt?.remark}</p>)}
-                <p className="text-xs font-medium text-brand-5/60 mt-1">{format(new Date(item.createdAt), 'MMM dd, yyyy HH:mm')}</p>
+                {item.receipt?.remark && (<p className="hidden md:block text-xs font-medium text-muted-foreground break-all mt-1">{item.receipt?.remark}</p>)}
+                <p className="text-xs font-medium text-muted-foreground mt-1">{format(new Date(item.createdAt), 'MMM dd, yyyy HH:mm')}</p>
               </div>
             </div>
             <div className="text-right whitespace-nowrap">
-              <p className="text-base md:text-lg font-bold text-brand-3">{formatPrice(item.amount || 0)}</p>
+              <p className="text-base md:text-lg font-bold text-emerald-400">{formatPrice(item.amount || 0)}</p>
               {/* <p className={`text-lg font-bold ${
                 item.transactionType === 'DEPOSIT' ? 'text-brand-3' : 'text-destructive'
               }`}>

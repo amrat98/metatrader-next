@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Share2, Copy, House, Network, BanknoteArrowDown, BanknoteArrowUp, Wallet, Headset, CreditCard, LogOut, Gift, Gem } from "lucide-react";
+import { Share2, Copy, House, Network, BanknoteArrowDown, BanknoteArrowUp, Wallet, Headset, CreditCard, LogOut, Gift, Gem, User, Link2 } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
@@ -46,18 +46,18 @@ const data = {
       icon: Network,
       bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-5 hover:to-brand-1  data-[active=true]:from-brand-5 data-[active=true]:to-brand-1"
     },
-    {
-      title: "My Investment",
-      url: `${routes.investment}`,
-      icon: BanknoteArrowDown,
-      bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-3 hover:to-brand-5  data-[active=true]:from-brand-3 data-[active=true]:to-brand-5"
-    },
-    {
-      title: "My Income",
-      url: `${routes.income}`,
-      icon: BanknoteArrowUp,
-      bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-2 hover:to-brand-3  data-[active=true]:from-brand-2 data-[active=true]:to-brand-3"
-    },
+    // {
+    //   title: "My Investment",
+    //   url: `${routes.investment}`,
+    //   icon: BanknoteArrowDown,
+    //   bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-3 hover:to-brand-5  data-[active=true]:from-brand-3 data-[active=true]:to-brand-5"
+    // },
+    // {
+    //   title: "My Income",
+    //   url: `${routes.income}`,
+    //   icon: BanknoteArrowUp,
+    //   bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-2 hover:to-brand-3  data-[active=true]:from-brand-2 data-[active=true]:to-brand-3"
+    // },
     {
       title: "Assets",
       url: `${routes.assets}`,
@@ -71,11 +71,17 @@ const data = {
       bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-1 hover:to-brand-2  data-[active=true]:from-brand-1 data-[active=true]:to-brand-2"
     },
     {
-      title: "Support",
-      url: `${routes.support}`,
-      icon: Headset,
-      bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-1 hover:to-brand-5  data-[active=true]:from-brand-1 data-[active=true]:to-brand-5"
+      title: "My Profile",
+      url: `${routes.profile}`,
+      icon: User,
+      bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-1 hover:to-brand-2  data-[active=true]:from-brand-1 data-[active=true]:to-brand-2"
     },
+    // {
+    //   title: "Support",
+    //   url: `${routes.support}`,
+    //   icon: Headset,
+    //   bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-1 hover:to-brand-5  data-[active=true]:from-brand-1 data-[active=true]:to-brand-5"
+    // },
   ],
 };
 
@@ -90,13 +96,13 @@ function NavMain({ items }: { items: typeof data.navMain }) {
   return (
     <>
     <div className="px-3 pt-4">
-      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wider m-0">Menu</p>
+      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider m-0">Menu</p>
     </div>
     <SidebarMenu className="p-3 pt-0">
       {items.map((item) => (
         <SidebarMenuItem key={item.title}>
           <SidebarMenuButton asChild
-          className={`px-4 py-3 h-auto w-full font-semibold! group-data-[collapsible=icon]:size-full! group/item ${item.bgColor}`}
+          className={`px-4 py-3 h-auto w-full font-semibold! group-data-[collapsible=icon]:size-full! group/item text-muted-foreground border border-transparent hover:text-slate-200 hover:bg-slate-800/50 active:text-slate-200 active:bg-slate-800/50 data-[active=true]:text-brand-1 data-[active=true]:bg-brand-1/10 data-[active=true]:border-brand-1/50`}
           data-active={pathname === item.url ? true : false}
           >
             <Link
@@ -164,6 +170,8 @@ function NavDoc() {
   const referralLinkB = `${baseUrl}${routes.register}?ref=${referralCodeB}`;
   const [showTooltip, setShowTooltip] = React.useState(false);
   const [showTooltipB, setShowTooltipB] = React.useState(false);
+  const [showTooltipCode, setShowTooltipCode] = React.useState(false);
+  const [showTooltipCodeB, setShowTooltipCodeB] = React.useState(false);
 
   // Share popup state
   const [sharePopupOpen, setSharePopupOpen] = React.useState(false);
@@ -187,6 +195,23 @@ function NavDoc() {
     }, 1000);
   };
 
+  const handleCopyCodeA = () => {
+    navigator.clipboard.writeText(referralCodeA);
+    toast.success("Referral code A copied to clipboard!");
+    setShowTooltipCode(true);
+    setTimeout(() => {
+      setShowTooltipCode(false);
+    }, 1000);
+  };
+  const handleCopyCodeB = () => {
+    navigator.clipboard.writeText(referralCodeB);
+    toast.success("Referral Code B copied to clipboard!");
+    setShowTooltipCodeB(true);
+    setTimeout(() => {
+      setShowTooltipCodeB(false);
+    }, 1000);
+  };
+
   const handleShareA = () => {
     setShareLink(referralLinkA);
     setSharePopupOpen(true);
@@ -199,37 +224,46 @@ function NavDoc() {
   return (
       <Suspense fallback={<div>Loading...</div>}>
       <div className="py-3 px-5 group-data-[collapsible=icon]:px-1.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:hidden transition-opacity delay-300 group-data-[collapsible=icon]:delay-0 group-data-[collapsible=icon]:duration-0">
-      <div className="bg-brand-1/20 p-3 border-1 border-brand-1 rounded-xl flex flex-col gap-2">
-        <div className="flex items-center gap-2">
-          <Avatar className="size-7 lg:size-10 rounded-full">
-            <AvatarImage src="/avatar.jpg" alt={profile?.userResult.nickName} />
-            <AvatarFallback className="rounded-full">{initials}</AvatarFallback>
-          </Avatar>
-          <div className="flex flex-col group-data-[collapsible=icon]:hidden">
-            <span className="text-sm font-semibold truncate">{profile?.userResult.nickName}</span>
-            {/* <span className="text-xs text-slate-500 truncate">{profile?.userResult.email}</span> */}
-          </div>
-        </div>
-        <span className="text-xs font-semibold mt-4">Referral Links</span>
-        <div className="flex items-center justify-between gap-2 transition-colors">
-          <div className="flex items-center gap-2 flex-1 min-w-0">
-            {/* <Gift className="w-3 h-3 text-[#b9f2ff] flex-shrink-0" /> */}
-            <span className="text-xs">Team A:</span>
-            <span className="text-xs font-mono text-brand-5 font-bold truncate">{referralCodeA}</span>
-          </div>
-          <div>
+      <div className="meta-border meta-shine p-3 rounded-xl flex flex-col gap-2">
+        <span className="text-sm font-semibold">Referral Team A</span>
+
+        {referralCodeA && (
+          <>
+          <TooltipProvider>
+            <Tooltip open={showTooltipCode}>
+              <TooltipTrigger asChild className="">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="rounded-sm border-0 shrink-0 bg-slate-800/50 hover:bg-slate-700/50 transition-colors font-semibold"
+                  onClick={handleCopyCodeA}
+                  disabled={!referralCodeA}
+                >
+                  <Gift className="size-4 text-brand-1" />
+                  <span className="text-xs text-slate-400">Code:</span>
+                  <span className="text-xs font-mono text-brand-2 truncate">{referralCodeA}</span>
+                  <Copy className="w-4 text-brand-1 ml-auto" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Copied</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
           <TooltipProvider>
             <Tooltip open={showTooltip}>
               <TooltipTrigger asChild className="">
                 <Button
                   variant="primary"
-                  size="icon"
-                  className="size-6 rounded-sm shrink-0"
+                  size="sm"
+                  className="rounded-sm border-0 shrink-0 bg-slate-800/50 hover:bg-slate-700/50 transition-colors font-semibold"
                   onClick={handleCopyA}
-                  disabled={!referralCodeA}
+                  disabled={!referralLinkA}
                 >
-                  <Copy className="size-3" />
-                  <span className="sr-only">Copy referral link</span>
+                  <Link2 className="size-4 text-emerald-400" />
+                  <span className="text-xs text-slate-400">Copy Referral Link</span>
+                  <Copy className="w-4 text-emerald-400 ml-auto" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -237,37 +271,61 @@ function NavDoc() {
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+
           <Button
             variant="primary"
-            size="icon"
-            className="size-6 shrink-0 ml-1"
+            size="sm"
+            className="rounded-sm border-0 shrink-0 bg-slate-800/50 hover:bg-slate-700/50 transition-colors font-semibold justify-normal"
             onClick={handleShareA}
             disabled={!referralCodeA}
           >
-            <Share2 className="size-3" />
-            <span className="sr-only">Share referral code</span>
+            <Share2 className="size-4 text-blue-400" />
+              <span className="text-xs text-slate-400">Share link</span>
           </Button>
-          </div>
-        </div>
-        <div className="flex items-center justify-between gap-2 transition-colors">
-          <div className="flex items-center gap-2 flex-1 min-w-0">
-            {/* <Gift className="w-3 h-3 text-[#b9f2ff] flex-shrink-0" /> */}
-            <span className="text-xs">Team B:</span>
-            <span className="text-xs font-mono text-brand-5 font-bold truncate">{referralCodeB}</span>
-          </div>
-          <div>
+          </>
+        )}
+      </div>
+
+      <div className="meta-border meta-shine p-3 rounded-xl flex flex-col gap-2 mt-4">
+        <span className="text-sm font-semibold">Referral Team B</span>
+
+        {referralCodeB && (
+          <>
+          <TooltipProvider>
+            <Tooltip open={showTooltipCodeB}>
+              <TooltipTrigger asChild className="">
+                <Button
+                  variant="primary"
+                  size="sm"
+                  className="rounded-sm border-0 shrink-0 bg-slate-800/50 hover:bg-slate-700/50 transition-colors font-semibold"
+                  onClick={handleCopyCodeB}
+                  disabled={!referralCodeB}
+                >
+                  <Gift className="size-4 text-brand-1" />
+                  <span className="text-xs text-slate-400">Code:</span>
+                  <span className="text-xs font-mono text-brand-2 truncate">{referralCodeB}</span>
+                  <Copy className="w-4 text-brand-1 ml-auto" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Copied</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
+
           <TooltipProvider>
             <Tooltip open={showTooltipB}>
               <TooltipTrigger asChild className="">
                 <Button
                   variant="primary"
-                  size="icon"
-                  className="size-6 rounded-sm shrink-0"
+                  size="sm"
+                  className="rounded-sm border-0 shrink-0 bg-slate-800/50 hover:bg-slate-700/50 transition-colors font-semibold"
                   onClick={handleCopyB}
-                  disabled={!referralCodeB}
+                  disabled={!referralLinkB}
                 >
-                  <Copy className="size-3" />
-                  <span className="sr-only">Copy referral link</span>
+                  <Link2 className="size-4 text-emerald-400" />
+                  <span className="text-xs text-slate-400">Copy Referral Link</span>
+                  <Copy className="w-4 text-emerald-400 ml-auto" />
                 </Button>
               </TooltipTrigger>
               <TooltipContent>
@@ -275,19 +333,21 @@ function NavDoc() {
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
+
           <Button
             variant="primary"
-            size="icon"
-            className="size-6 shrink-0 ml-1"
+            size="sm"
+            className="rounded-sm border-0 shrink-0 bg-slate-800/50 hover:bg-slate-700/50 transition-colors font-semibold justify-normal"
             onClick={handleShareB}
             disabled={!referralCodeB}
           >
-            <Share2 className="size-3" />
-            <span className="sr-only">Share referral code</span>
+            <Share2 className="size-4 text-blue-400" />
+              <span className="text-xs text-slate-400">Share link</span>
           </Button>
-          </div>
-        </div>
+          </>
+        )}
       </div>
+
       </div>
       <SharePopup open={sharePopupOpen} onClose={() => setSharePopupOpen(false)} link={shareLink} title="Join me on MetaTrader!" description="Register using my referral link." />
     </Suspense>
@@ -308,17 +368,17 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
   return (
     <Sidebar collapsible="icon" {...props} className="bg-background">
-      <SidebarHeader className="min-h-18 items-center justify-center border-b border-border group-data-[collapsible=icon]:px-1.5">
+      <SidebarHeader className="min-h-18 py-4 items-center justify-center border-b border-border group-data-[collapsible=icon]:px-1.5">
         <SidebarMenu className="items-center">
         <SidebarMenuItem>
         <SidebarMenuButton asChild className="h-auto p-0 hover:bg-transparent">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-brand-5 to-brand-3 flex items-center justify-center animate-float">
-            <Gem className="w-6 h-6 text-white" />
+          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-brand-1 to-brand-2 flex items-center justify-center shadow-[0_0_20px_rgba(185,242,255,.15)]">
+            <Gem className="w-6 h-6 text-black" />
           </div>
           <div>
-            <h1 className="font-bold text-lg bg-gradient-to-r from-brand-3 to-brand-5 bg-clip-text text-transparent">MetaTrader</h1>
-            <p className="text-xs text-slate-500">Premium Trading</p>
+            <h1 className="font-bold text-lg bg-gradient-to-r from-brand-1 to-brand-2 bg-clip-text text-transparent">MetaTrader</h1>
+            <p className="text-xs text-muted-foreground">Premium Trading</p>
           </div>
         </div>
         </SidebarMenuButton>
@@ -367,8 +427,8 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       </SidebarContent>
       <SidebarFooter className="border-t border-border py-5">
       <Button  onClick={handleLogout}
-          variant="outline"
-          className="text-sm border-destructive border-2 text-destructive hover:bg-destructive hover:text-white whitespace-nowrap overflow-hidden">
+          variant="default"
+          className="text-sm h-10 bg-white text-destructive hover:bg-destructive hover:text-white whitespace-nowrap overflow-hidden">
           <LogOut />
           <span className="group-data-[collapsible=icon]:hidden">Logout</span>
           </Button>

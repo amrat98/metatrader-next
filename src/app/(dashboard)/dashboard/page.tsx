@@ -16,7 +16,12 @@ import { UserContext } from "@/lib/usercontent";
 import { cn, formatPrice } from "@/lib/utils";
 import { format } from "date-fns";
 import CreditCard from "./creditcard"; 
-import { Sparkle, User, ChartSpline, GitFork, Waypoints, WalletIcon, CalendarArrowUp, PiggyBank, BanknoteArrowUp, BanknoteArrowDown, Users, BicepsFlexed, Snail, } from "lucide-react";
+import { Sparkle, User, ChartSpline, GitFork, Waypoints, WalletIcon, CalendarArrowUp, PiggyBank, BanknoteArrowUp, BanknoteArrowDown, Users, BicepsFlexed, Snail, Gem, } from "lucide-react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AllIncomeView from "../income/allincomeview";
+import TeamDividentView from "../income/teamdividentview";
+import MatchingRewardView from "../income/matchingrewardview";
+import InvestmentTable from "../investment/investmenttable";
 
 
 
@@ -115,7 +120,7 @@ export default function Dashboard() {
         title: "Introduction Bonus",
         price: dashBoardData?.combinedResults?.find(r => r.rewardType === "Referral")?.totalProfit || 0,
         icon: Sparkle,
-        iconBg: "from-brand-4 to-brand-5",
+        iconBg: "from-extra-4 to-extra-5",
         colorTitle: "text-brand-5",
         colorPrice: "from-brand-4 to-brand-5",
       },
@@ -124,7 +129,7 @@ export default function Dashboard() {
         title: "PAMM Profit",
         price: dashBoardData?.combinedResults?.find(r => r.rewardType === "ROI")?.totalProfit || 0,
         icon: ChartSpline,
-        iconBg: "from-brand-3 to-brand-4",
+        iconBg: "from-extra-3 to-extra-4",
         colorTitle: "text-brand-3",
         colorPrice: "from-brand-3 to-brand-4",
       },
@@ -133,7 +138,7 @@ export default function Dashboard() {
         title: "Profit Sharing",
         price: dashBoardData?.combinedResults?.find(r => r.rewardType === "TEAM_ROI")?.totalProfit || 0,
         icon: Waypoints,
-        iconBg: "from-brand-1 to-brand-2",
+        iconBg: "from-extra-1 to-extra-2",
         colorTitle: "text-brand-1",
         colorPrice: "from-brand-1 to-brand-2",
       },
@@ -142,7 +147,7 @@ export default function Dashboard() {
         title: "Billionaire Club",
         price: (dashBoardData?.combinedResults?.find(r => r.rewardType === "BILLIONAIR_CLUB")?.totalProfit || 0) + (dashBoardData?.combinedResults?.find(r => r.rewardType === "BILLIONAIR_CONTRIBUTION")?.totalProfit || 0),
         icon: WalletIcon,
-        iconBg: "from-brand-2 to-brand-3",
+        iconBg: "from-extra-2 to-extra-3",
         colorTitle: "text-brand-3",
         colorPrice: "from-brand-3 to-brand-2",
       },
@@ -151,7 +156,7 @@ export default function Dashboard() {
         title: "Monthly Allowance",
         price: dashBoardData?.combinedResults?.find(r => r.rewardType === "MONTHLY_ALLOWANCE")?.totalProfit || 0,
         icon: CalendarArrowUp,
-        iconBg: "from-brand-1 to-brand-5",
+        iconBg: "from-extra-1 to-extra-5",
         colorTitle: "text-brand-5",
         colorPrice: "from-brand-5 to-brand-1",
       },
@@ -160,7 +165,7 @@ export default function Dashboard() {
         title: "IB Matching",
         price: dashBoardData?.combinedResults?.find(r => r.rewardType === "MATCHING_BONUS_REWARD")?.totalProfit || 0,
         icon: GitFork,
-        iconBg: "from-brand-3 to-brand-1",
+        iconBg: "from-extra-3 to-extra-1",
         colorTitle: "text-brand-3",
         colorPrice: "from-brand-1 to-brand-3",
       },
@@ -355,32 +360,66 @@ export default function Dashboard() {
   return (
     <>
       <div className="flex flex-1 flex-col gap-5 p-4">
+        <div className="animate-slide-up">
+          <h1 className="text-3xl font-bold mb-2">
+            <span className="meta-text">Welcome back</span>
+          </h1>
+          <p className="text-muted-foreground">Here's your portfolio overview</p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
         {data.cards_income.map((card, index) => {
           const Icon = card.icon;
           return (
-            <Card key={index} className="glass-effect hover:scale-102 transition-all duration-300 group flex-1 gap-2">
+            <Card key={index} className="glass-effect hover:scale-102 transition-all duration-300 group flex-1 gap-2 meta-glow">
               <CardHeader>
                 <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className={`w-10 h-10 rounded-lg bg-gradient-to-br flex items-center justify-center group-hover:scale-110 transition-transform ${card.iconBg}`}>
-                    <Icon className="w-5 h-5 text-white" />
-                  </div>
-                  <CardTitle className={`${card.colorTitle} text-lg`}>{card.title}</CardTitle>
+                  <CardTitle className="text-base text-muted-foreground">{card.title}</CardTitle>
+                </div>
+                <div className={`w-10 h-10 rounded-lg bg-gradient-to-br flex items-center justify-center group-hover:scale-110 transition-transform ${card.iconBg}`}>
+                  <Icon className="w-5 h-5 text-white" />
                 </div>
               </div>
               </CardHeader>
               <CardContent>
-                <p className={`text-4xl font-bold bg-gradient-to-r bg-clip-text text-transparent ${card.colorPrice}`}>
+                <p className={`text-3xl font-bold text-white`}>
                   {formatPrice(card.price.toString())}
                 </p>
                 {card.name === 'billionaire_club' && (
-                <p className="text-sm text-slate-600 mt-2">50% will be sent to billionaire contribution</p>
+                <p className="text-sm text-slate-100 mt-2">50% will be sent to billionaire contribution</p>
               )}
               </CardContent>
             </Card>
           );
         })}
+
+        <div className="flex-1 pb-5 col-span-1 md:col-span-2 xl:col-span-3">
+          <Tabs defaultValue="investment" className="gap-4">
+          <TabsList className="glass-effect shadow-sm w-full h-auto p-1 overflow-auto justify-normal gap-2 meta-shine meta-border">
+            <TabsTrigger value="investment" className="dark:data-[state=active]:meta-shine dark:data-[state=active]:text-brand-2 border-0 p-2 px-4 cursor-pointer dark:hover:meta-shine dark:hover:text-brand-2">
+                <BanknoteArrowUp className="size-5" />
+                My Investment
+              </TabsTrigger>
+              <TabsTrigger value="all" className="dark:data-[state=active]:meta-shine dark:data-[state=active]:text-brand-2 border-0 p-2 px-4 cursor-pointer dark:hover:meta-shine dark:hover:text-brand-2">
+                <BanknoteArrowUp className="size-5" />
+                All income
+              </TabsTrigger>
+              {/* <TabsTrigger value="team_divident_income" className="dark:data-[state=active]:meta-shine dark:data-[state=active]:text-brand-2 border-0 p-2 px-4 cursor-pointer dark:hover:meta-shine dark:hover:text-brand-2">
+                <Users className="size-5" />
+                Team divident income
+              </TabsTrigger> */}
+              <TabsTrigger value="matching_reward_income" className="dark:data-[state=active]:meta-shine dark:data-[state=active]:text-brand-2 border-0 p-2 px-4 cursor-pointer dark:hover:meta-shine dark:hover:text-brand-2">
+                <Gem className="size-5" />
+                Matching reward income
+              </TabsTrigger>
+            </TabsList>
+            <TabsContent value="investment"><InvestmentTable /></TabsContent>
+            <TabsContent value="all"><AllIncomeView /></TabsContent>
+            <TabsContent value="team_divident_income"><TeamDividentView /></TabsContent>
+            <TabsContent value="matching_reward_income"><MatchingRewardView /></TabsContent>
+          </Tabs>
+        </div>
 
           {/* <div className="relative xl:row-start-1 xl:col-start-3 col-span-2 xl:col-auto">
             <div
@@ -446,7 +485,7 @@ export default function Dashboard() {
             </Carousel>
           </div>
           </div> */}
-          <Card className="relative col-span-1 md:col-span-2 xl:col-span-3">
+          {/* <Card className="relative col-span-1 md:col-span-2 xl:col-span-3">
             <CardContent>
                 <div className="flex flex-wrap gap-2 items-center justify-between">
                   <h2 className="text-sm sm:text-base lg:text-lg font-semibold">
@@ -484,7 +523,7 @@ export default function Dashboard() {
                   <span className="text-primary font-semibold text-xl">100%</span>
                 </div>
             </CardContent>
-          </Card>
+          </Card> */}
           {/* <div className="relative col-span-2 xl:col-auto xl:row-start-4 xl:col-start-3 xl:row-span-1">
           <div
             className={`${cardStyle} p-3 lg:p-5 relative z-1 flex justify-center items-center flex-col! gap-3 border-0! bg-transparent! shadow-none!`}>
@@ -525,7 +564,7 @@ export default function Dashboard() {
             </div>
           </div> */}
 
-          <div className="relative  col-span-1 md:col-span-2 xl:col-span-3">
+          {/* <div className="relative  col-span-1 md:col-span-2 xl:col-span-3">
             <Card>
               <CardHeader>
                 <CardTitle className="text-brand-5 text-lg lg:text-2xl font-bold">{data.wallet.title}</CardTitle>
@@ -642,7 +681,7 @@ export default function Dashboard() {
                 </div>
               </CardContent>
             </Card>
-          </div>
+          </div> */}
 {/* 
             <div className="relative  col-span-1 md:col-span-2 xl:col-span-3">
           <div

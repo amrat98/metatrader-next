@@ -138,8 +138,8 @@ export default function TransitionTable() {
       <CardHeader>
         <div className="flex flex-wrap gap-5 justify-between">
         <div>
-        <CardTitle className="text-brand-3 text-lg lg:text-2xl font-bold">Investment History</CardTitle>
-        <CardDescription className="text-slate-400 font-medium">Your recent investment in the plans</CardDescription>
+        <CardTitle className="text-white text-lg lg:text-2xl font-bold">Investment History</CardTitle>
+        <CardDescription className="text-muted-foreground font-medium">Your recent investment in the plans</CardDescription>
         </div>
         <div className="mt-2 mb-4 text-right flex flex-nowrap items-center gap-2">
           <label htmlFor="transaction-type-select" className="font-medium text-sm">Transaction Type:</label>
@@ -167,23 +167,24 @@ export default function TransitionTable() {
       {isLoading ? (
         <>
         {Array.from({ length: 4 }).map((_,i) => (
-          <div key={i} className="p-4 rounded-xl transition-all duration-300 border ">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-3">
-              <Skeleton className="size-10 rounded-full" />
-              <div className="space-y-3">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
-              </div>
-              </div>
-              <div className="space-y-3">
-                <Skeleton className="h-4 w-[100px]" />
-                <Skeleton className="h-4 w-[50px] ml-auto" />
+          <div key={i} className="p-4 rounded-xl transition-all duration-300 meta-border meta-shine">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3 flex-1">
+              <Skeleton className="min-w-8 size-8 lg:size-10 rounded-full bg-brand-1/30" />
+              <div className="space-y-3 flex-1">
+                <Skeleton className="h-4 w-[250px] max-w-8/12 bg-brand-1/30" />
+                <Skeleton className="h-4 w-[200px] max-w-5/12 bg-brand-1/30" />
               </div>
             </div>
+            <div className="space-y-3 hidden lg:block">
+              <Skeleton className="h-4 w-[100px] max-w-full bg-brand-1/30" />
+              <Skeleton className="h-4 w-[50px] max-w-full ml-auto bg-brand-1/30" />
+            </div>
           </div>
+        </div>
         ))}
       </>
+
       ): (
         <>
       {tableData.length === 0 ? (
@@ -196,7 +197,7 @@ export default function TransitionTable() {
       (
         <>
         {tableData.map((item, index) => (
-        <div key={`${item.id}-${index}`} className="p-4 rounded-xl transition-all duration-300 border shadow-sm bg-gray-50 bg-gradient-to-b from-gray-50 to-brand-5/5">
+        <div key={`${item.id}-${index}`} className="p-4 rounded-xl transition-all duration-300 border shadow-sm  meta-border meta-shine hover:meta-glow">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${

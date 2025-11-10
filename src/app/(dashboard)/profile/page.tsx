@@ -437,10 +437,11 @@ export default function UserProfile() {
   return (
     <>
       <div className="flex flex-1 flex-col gap-5 p-4">
-        <div className="flex-1">
-          <h2 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3">
-            User Profile
-          </h2>
+        <div className="animate-slide-up">
+          <h1 className="text-3xl font-bold mb-2">
+            <span className="meta-text">User Profile</span>
+          </h1>
+          {/* <p className="text-muted-foreground">View and manage your referral network</p> */}
         </div>
         <div className="flex-1 pb-5">
           <div className="border-2 border-primary p-5 py-8 lg:p-10 bg-card rounded-lg lg:rounded-2xl flex gap-16 flex-col lg:flex-row">
@@ -882,7 +883,7 @@ export default function UserProfile() {
                     onClick={handlePasswordCancel}
                     disabled={isPasswordLoading}
                   >
-                    Cancel
+                    Reset
                   </Button>
                   <Button
                     type="submit"

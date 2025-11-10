@@ -135,8 +135,8 @@ export default function TransitionTable() {
       <CardHeader>
         <div className="flex flex-wrap gap-5 justify-between">
         <div>
-        <CardTitle className="text-brand-3 text-lg lg:text-2xl font-bold">Transaction History</CardTitle>
-        <CardDescription className="text-slate-400 font-medium">Your recent deposits and withdrawals</CardDescription>
+        <CardTitle className="text-white text-lg lg:text-2xl font-bold">Transaction History</CardTitle>
+        <CardDescription className="text-muted-foreground font-medium">Your recent deposits and withdrawals</CardDescription>
         </div>
         <div className="mt-2 mb-4 text-right flex flex-nowrap items-center gap-2">
           <label htmlFor="transaction-type-select" className="font-medium text-sm">Transaction Type:</label>
@@ -164,21 +164,21 @@ export default function TransitionTable() {
       {isLoading ? (
         <>
         {Array.from({ length: 4 }).map((_,i) => (
-          <div key={i} className="p-4 rounded-xl transition-all duration-300 border ">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-3">
-              <Skeleton className="size-10 rounded-full" />
-              <div className="space-y-3">
-                <Skeleton className="h-4 w-[250px]" />
-                <Skeleton className="h-4 w-[200px]" />
-              </div>
-              </div>
-              <div className="space-y-3">
-                <Skeleton className="h-4 w-[100px]" />
-                <Skeleton className="h-4 w-[50px] ml-auto" />
+          <div key={i} className="p-4 rounded-xl transition-all duration-300 meta-border meta-shine">
+          <div className="flex items-center justify-between mb-2">
+            <div className="flex items-center gap-3 flex-1">
+              <Skeleton className="min-w-8 size-8 lg:size-10 rounded-full bg-brand-1/30" />
+              <div className="space-y-3 flex-1">
+                <Skeleton className="h-4 w-[250px] max-w-8/12 bg-brand-1/30" />
+                <Skeleton className="h-4 w-[200px] max-w-5/12 bg-brand-1/30" />
               </div>
             </div>
+            <div className="space-y-3 hidden lg:block">
+              <Skeleton className="h-4 w-[100px] max-w-full bg-brand-1/30" />
+              <Skeleton className="h-4 w-[50px] max-w-full ml-auto bg-brand-1/30" />
+            </div>
           </div>
+        </div>
         ))}
       </>
       ): (
@@ -193,7 +193,7 @@ export default function TransitionTable() {
       (
         <>
         {tableData.map((item, index) => (
-        <div key={`${item.id}-${index}`} className="p-4 rounded-xl transition-all duration-300 border shadow-sm bg-gray-50">
+        <div key={`${item.id}-${index}`} className="p-4 rounded-xl transition-all duration-300 border shadow-sm  meta-border meta-shine hover:meta-glow">
           <div className="flex items-center justify-between mb-2">
             <div className="flex items-center gap-3">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center ${
@@ -209,17 +209,17 @@ export default function TransitionTable() {
               </div>
               <div>
                 <p className="font-semibold capitalize">{item.transactionType.toLowerCase()}</p>
-                <p className="text-xs font-medium text-brand-5/60">{format(new Date(item.createdAt), 'MMM dd, yyyy HH:mm')}</p>
+                <p className="text-sm font-medium text-muted-foreground">{format(new Date(item.createdAt), 'MMM dd, yyyy HH:mm')}</p>
               </div>
             </div>
             <div className="text-right">
               <p className={`text-lg font-bold ${
-                item.transactionType === 'DEPOSIT' ? 'text-brand-3' : 'text-destructive'
+                item.transactionType === 'DEPOSIT' ? 'text-extra-3' : 'text-destructive'
               }`}>
                 {item.transactionType === 'DEPOSIT' ? '+' : '-'} {formatPrice(item.amount || 0)}
               </p>
               {item.transactionFee !== 0 && (
-              <p className="text-sm font-semibold text-brand-5/60">Fee: {formatPrice(item.transactionFee || 0)}</p>
+              <p className="text-sm font-semibold text-brand-2">Fee: {formatPrice(item.transactionFee || 0)}</p>
               )}
               {/* <Badge variant={item.status === 'COMPLETED' ? 'default' : 'secondary'} className="text-xs">
                 {item.status}
@@ -230,7 +230,7 @@ export default function TransitionTable() {
           <div className="flex flex-wrap gap-4 text-sm mt-3">
             {item.formAddress && (
             <div>
-              <p className="text-brand-5/60">From</p>
+              <p className="text-muted-foreground">From</p>
               {item.formAddress.length >= 20 ? (
                 <>
                 <p className="text-brand-5 font-mono">{item.formAddress.slice(0, 10)}... 
@@ -260,20 +260,20 @@ export default function TransitionTable() {
             )}
             {item.formAddress && item.toAddress && (
             <div className="hidden md:block">
-              <ArrowRight className="text-brand-5/60" />
+              <ArrowRight className="text-muted-foreground" />
             </div>
             )}
             {item.toAddress && (
             <div>
-            <p className="text-brand-5/60">To</p>
+            <p className="text-muted-foreground">To</p>
             {item.toAddress.length >= 20 ? (
               <>
                 <p className="text-brand-5 font-mono">{item.toAddress.slice(0, 10)}...
                 <TooltipProvider>
-                  <Tooltip open={copiedKey === `from-${index}`}>
+                  <Tooltip open={copiedKey === `to-${index}`}>
                     <TooltipTrigger asChild>
                       <Button
-                        onClick={() => handleCopyAddress(item.toAddress, `from-${index}`)}
+                        onClick={() => handleCopyAddress(item.toAddress, `to-${index}`)}
                         variant="link"
                         size="icon"
                         className="size-7 shrink-0 cursor-pointer text-brand-5 bg-brand-4/20"

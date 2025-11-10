@@ -143,12 +143,12 @@ function LoginFormContent() {
 
   return (
     <>
-      <Card className="w-full text-left backdrop-blur-md bg-card/60">
+      <Card className="w-full text-left bg-brand-3 backdrop-blur-xl shadow-[0_0_20px_rgba(185,242,255,.15)]">
         <CardHeader className="text-center">
           <CardTitle>
             <h1 className="text-2xl">Sign In</h1>
           </CardTitle>
-          <CardDescription className="text-foreground text-base mt-1">
+          <CardDescription className="text-muted-foreground text-base mt-1">
             <p>Welcome back to Metatrader</p>
           </CardDescription>
         </CardHeader>
@@ -160,7 +160,7 @@ function LoginFormContent() {
                 name="nickName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel htmlFor="nickName">Username</FormLabel>
+                    <FormLabel htmlFor="nickName" className="text-sm font-medium text-slate-300">Username</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter your Username"
@@ -185,7 +185,7 @@ function LoginFormContent() {
                 name="password"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel htmlFor="password">Password</FormLabel>
+                    <FormLabel htmlFor="password" className="text-sm font-medium text-slate-300">Password</FormLabel>
                       <div className="relative">
                     <FormControl>
                         <Input
@@ -263,7 +263,7 @@ function LoginFormContent() {
                   variant: "default",
                   size: "xl",
                   textSize: "xl",
-                  className: "w-full cursor-pointer",
+                  className: "w-full cursor-pointer transition-all duration-300 bg-gradient-to-r from-brand-1 to-brand-2 hover:from-brand-2 hover:to-brand-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(185,242,255,.15)]",
                 })}
               >
                 {isLoading ? "Signing in..." : "Sign In"}

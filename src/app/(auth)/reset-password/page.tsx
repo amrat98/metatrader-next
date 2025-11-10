@@ -94,12 +94,12 @@ export default function ResetPasswordForm() {
 
   return (
     <>
-      <Card className="w-full text-left backdrop-blur-md bg-card/60">
+      <Card className="w-full text-left bg-brand-3 backdrop-blur-xl shadow-[0_0_20px_rgba(185,242,255,.15)]">
         <CardHeader className="text-center">
           <CardTitle>
             <h1 className="text-2xl">Forgot Password</h1>
           </CardTitle>
-          <CardDescription className="text-foreground text-base mt-1">
+          <CardDescription className="text-muted-foreground text-base mt-1">
             <p>Enter your username to reset your password</p>
           </CardDescription>
         </CardHeader>
@@ -111,7 +111,7 @@ export default function ResetPasswordForm() {
                 name="username"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel htmlFor="username">Username</FormLabel>
+                    <FormLabel htmlFor="username" className="text-sm font-medium text-slate-300">Username</FormLabel>
                     <FormControl>
                       <Input
                         id="username"
@@ -142,7 +142,7 @@ export default function ResetPasswordForm() {
                   variant: "primary",
                   size: "xl",
                   textSize: "xl",
-                  className: "w-full cursor-pointer",
+                  className: "w-full cursor-pointer transition-all duration-300 bg-gradient-to-r from-brand-1 to-brand-2 hover:from-brand-2 hover:to-brand-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(185,242,255,.15)]",
                 })}
                 disabled={isLoading}
               >

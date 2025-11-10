@@ -437,7 +437,7 @@ export default function Transfer() {
     <>
     <Card>
     <CardHeader>
-        <CardTitle className="text-brand-3 text-lg lg:text-2xl font-bold">Internal Transfer USDT</CardTitle>
+        <CardTitle className="text-white text-lg lg:text-2xl font-bold">Internal Transfer USDT</CardTitle>
         <CardDescription className="text-slate-400 font-medium">Internal Transfer USDT to your external wallet</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
@@ -466,7 +466,7 @@ export default function Transfer() {
                       type="button"
                       variant="link"
                       size="icon"
-                      className="size-10 shrink-0 cursor-pointer text-brand-3"
+                      className="size-10 shrink-0 cursor-pointer text-brand-2"
                       disabled={isVerifying || qrLoading}
                       onClick={handleQrCode}
                     >
@@ -505,7 +505,7 @@ export default function Transfer() {
                 type="button"
                 variant="default"
                 size="lg"
-                className="shrink-0 cursor-pointer absolute right-2 top-2 text-sm bg-brand-3 "
+                className="shrink-0 cursor-pointer absolute right-2 top-2 text-sm bg-brand-2 "
                 onClick={handleMaxAmount}
                 disabled={isVerifying || getCodeLoading || verifyLoading || confirmLoading}
               >
@@ -523,7 +523,7 @@ export default function Transfer() {
               Transaction Password
               <Link
                 href={routes.profile}
-                className={buttonVariants({ variant: "link", size: null, textSize: "xs", className: "text-brand-5/60!" })}
+                className={buttonVariants({ variant: "link", size: null, textSize: "xs", className: "text-brand-2!" })}
               >
                 Forgot Password ?
               </Link>
@@ -552,7 +552,7 @@ export default function Transfer() {
                 <Button 
                   variant="link"
                   size={null} 
-                  className="cursor-pointer text-brand-5/60!"
+                  className="cursor-pointer text-brand-2!"
                   textSize="xs" 
                   onClick={handleGetCode}
                   disabled={resendTimer > 0 || getCodeLoading}
@@ -577,7 +577,7 @@ export default function Transfer() {
               type="button"
               variant="default"
               size="lg"
-              className="shrink-0 cursor-pointer absolute right-2 top-2 bg-brand-3"
+              className="shrink-0 cursor-pointer absolute right-2 top-2 bg-brand-2"
               onClick={isVerified ? undefined : (isVerifying ? handleVerifyCode : handleGetCode)}
               disabled={isVerified || (isVerifying ? !formData.verificationCode || verifyLoading : getCodeLoading)}
             >
@@ -603,7 +603,7 @@ export default function Transfer() {
               variant="default"
               size="xl"
               textSize="lg"
-              className="w-full cursor-pointer mt-3 bg-brand-3"
+              className="w-full cursor-pointer mt-3 text-white bg-gradient-to-r from-extra-3 to-emerald-500 hover:from-emerald-500 hover:to-extra-3 hover:scale-105 hover:shadow-[0_0_20px_rgba(185,242,255,.15)]"
               disabled={!isVerified || confirmLoading}
             >
               {confirmLoading ? "Transferring..." : "Internal Transfer USDT"}
@@ -611,8 +611,8 @@ export default function Transfer() {
           </div>
         </div>
       </form>
-      <div className="p-4 rounded-lg bg-brand-2/30 border border-brand-1/50 mt-10">
-          <p className="text-sm text-brand-1 font-semibold mb-2">Important Notes:</p>
+      <div className="p-4 rounded-lg bg-extra-1/20 border border-extra-1/50 mt-10">
+          <p className="text-sm text-extra-1 font-semibold mb-2">Important Notes:</p>
           <ul className="text-xs space-y-1 list-disc list-inside">
             <li>Minimum withdrawal: 20 USDT</li>
             <li>Network fee: 1 USDT</li>
@@ -625,7 +625,7 @@ export default function Transfer() {
       <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
         <DialogContent className="[&>button]:hidden shadow-sm" onPointerDownOutside={e => e.preventDefault()}>
           <DialogHeader>
-            <DialogTitle >Confirm Transfer</DialogTitle>
+            <DialogTitle className="text-white">Confirm Transfer</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
@@ -679,7 +679,7 @@ export default function Transfer() {
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
         <DialogContent className="[&>button]:hidden shadow-sm" onPointerDownOutside={e => e.preventDefault()}>
           <DialogHeader className="mb-4">
-            <DialogTitle className="text-brand-3">Transfer Successful</DialogTitle>
+            <DialogTitle className="text-white">Transfer Successful</DialogTitle>
             <DialogDescription>
               Your transfer has been completed successfully.
             </DialogDescription>
@@ -704,7 +704,7 @@ export default function Transfer() {
       <Dialog open={showQrScanner} onOpenChange={handleCloseScanner}>
         <DialogContent className="[&>button]:hidden shadow-sm" onPointerDownOutside={e => e.preventDefault()}>
           <DialogHeader>
-            <DialogTitle>Scan QR Code</DialogTitle>
+            <DialogTitle className="text-white">Scan QR Code</DialogTitle>
             <DialogDescription className="text-brand-5/50">
               Position the QR code within the scanner frame
             </DialogDescription>

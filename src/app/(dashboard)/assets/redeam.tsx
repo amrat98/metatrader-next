@@ -139,7 +139,7 @@ export default function Redeam() {
       /> */}
       <Card>
       <CardHeader>
-        <CardTitle className="text-brand-5 text-lg lg:text-2xl font-bold">Redeem</CardTitle>
+        <CardTitle className="text-white text-lg lg:text-2xl font-bold">Redeem</CardTitle>
         {/* <CardDescription className="text-slate-400 font-medium">Redeem USDT to your external wallet</CardDescription> */}
       </CardHeader>
       <CardContent className="space-y-4">
@@ -171,7 +171,7 @@ export default function Redeam() {
                         type="button"
                         variant="default"
                         size="lg"
-                        className="shrink-0 cursor-pointer absolute right-2 top-2 text-sm bg-brand-5 hover:bg-brand-4"
+                        className="shrink-0 cursor-pointer absolute right-2 top-2 text-sm bg-brand-2"
                         onClick={handleMaxAmount}
                       >
                         Max
@@ -190,10 +190,10 @@ export default function Redeam() {
             />
             <Button
               type="submit"
-              variant="success"
+              variant="default"
               size="xl"
               textSize="lg"
-              className="w-full cursor-pointer mt-3 bg-brand-5 hover:bg-brand-4"
+              className="w-full cursor-pointer mt-3 text-white bg-gradient-to-r from-extra-3 to-emerald-500 hover:from-emerald-500 hover:to-extra-3 hover:scale-105 hover:shadow-[0_0_20px_rgba(185,242,255,.15)]"
               disabled={isLoading}
             >
               {isLoading ? "Processing..." : "Redeem Now"}
@@ -201,8 +201,8 @@ export default function Redeam() {
           </form>
         </Form>
       </div>
-      <div className="p-4 rounded-lg bg-brand-2/30 border border-brand-1/50 mt-10">
-          <p className="text-sm text-brand-1 font-semibold mb-2">Important Notes:</p>
+      <div className="p-4 rounded-lg bg-extra-1/20 border border-extra-1/50 mt-10">
+          <p className="text-sm text-extra-1 font-semibold mb-2">Important Notes:</p>
           <ul className="text-xs space-y-1 list-disc list-inside">
             <li>Minimum withdrawal: 20 USDT</li>
             <li>Network fee: 1 USDT</li>

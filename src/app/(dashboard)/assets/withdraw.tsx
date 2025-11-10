@@ -503,7 +503,7 @@ export default function Withdraw() {
     <>
     <Card>
       <CardHeader>
-        <CardTitle className="text-brand-3 text-lg lg:text-2xl font-bold">Withdraw USDT</CardTitle>
+        <CardTitle className="text-white text-lg lg:text-2xl font-bold">Withdraw USDT</CardTitle>
         <CardDescription className="text-slate-400 font-medium">Withdraw USDT to your external wallet</CardDescription>
         <CardDescription className="text-destructive font-medium text-base mt-3">Payout will be on 5th, 15th and 25th of every month.</CardDescription>
       </CardHeader>
@@ -516,11 +516,11 @@ export default function Withdraw() {
           onValueChange={handleWithdrawTypeChange}
         >
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="USDT" id="USDT" className="border-brand-3 size-5 border-2 text-brand-3" />
+            <RadioGroupItem value="USDT" id="USDT" className="border-brand-2 size-5 border-2 text-brand-2" />
             <Label htmlFor="USDT" className="text-lg lg:text-xl font-semibold cursor-pointer">BEP 20</Label>
           </div>
           <div className="flex items-center space-x-2">
-            <RadioGroupItem value="CASH" id="CASH" className="border-brand-3 size-5 border-2 text-brand-3" />
+            <RadioGroupItem value="CASH" id="CASH" className="border-brand-2 size-5 border-2 text-brand-2" />
             <Label htmlFor="CASH" className="text-lg lg:text-xl font-semibold cursor-pointer">Cash</Label>
           </div>
         </RadioGroup>
@@ -549,7 +549,7 @@ export default function Withdraw() {
                         type="button"
                         variant="link"
                         size="icon"
-                        className="size-10 shrink-0 cursor-pointer text-brand-3"
+                        className="size-10 shrink-0 cursor-pointer text-brand-2"
                         disabled={isVerifying || qrLoading}
                         onClick={handleQrCode}
                       >
@@ -587,9 +587,9 @@ export default function Withdraw() {
               />
               <Button
                 type="button"
-                variant="success"
+                variant="default"
                 size="lg"
-                className="shrink-0 cursor-pointer absolute right-2 top-2 text-sm"
+                className="shrink-0 cursor-pointer absolute right-2 top-2 text-sm bg-brand-2"
                 onClick={handleMaxAmount}
                 disabled={isVerifying}
               >
@@ -604,7 +604,7 @@ export default function Withdraw() {
           <div>
             <label htmlFor="transactionPassword" className="text-base font-semibold mb-2 flex justify-between items-baseline flex-wrap gap-3">
               Transaction Password
-              <Link href={routes.profile} className={buttonVariants({ variant: "link", size: null, textSize: "xs", className: "text-brand-5/60!" })}>
+              <Link href={routes.profile} className={buttonVariants({ variant: "link", size: null, textSize: "xs", className: "text-brand-2!" })}>
                 Forgot Password ?
               </Link>
             </label>
@@ -653,9 +653,9 @@ export default function Withdraw() {
               />
               <Button
               type="button"
-              variant="success"
+              variant="default"
               size="lg"
-              className="shrink-0 cursor-pointer absolute right-2 top-2"
+              className="shrink-0 cursor-pointer absolute right-2 top-2 bg-brand-2"
               onClick={isVerified ? undefined : (isVerifying ? handleVerifyCode : handleGetCode)}
               disabled={isVerified || (isVerifying ? !formData.verificationCode || verifyLoading : getCodeLoading)}
             >
@@ -677,10 +677,10 @@ export default function Withdraw() {
           <div className="xl:col-span-2">
             <Button
               type="submit"
-              variant="success"
+              variant="default"
               size="xl"
               textSize="lg"
-              className="w-full cursor-pointer mt-3"
+              className="w-full cursor-pointer mt-3 text-white bg-gradient-to-r from-extra-3 to-emerald-500 hover:from-emerald-500 hover:to-extra-3 hover:scale-105 hover:shadow-[0_0_20px_rgba(185,242,255,.15)]"
               disabled={!isVerified || confirmLoading}
             >
               {confirmLoading ? "Submitting..." : "Withdraw USDT"}
@@ -688,8 +688,8 @@ export default function Withdraw() {
           </div>
         </div>
       </form>
-      <div className="p-4 rounded-lg bg-brand-2/30 border border-brand-1/50 mt-10">
-          <p className="text-sm text-brand-1 font-semibold mb-2">Important Notes:</p>
+      <div className="p-4 rounded-lg bg-extra-1/20 border border-extra-1/50 mt-10">
+          <p className="text-sm text-extra-1 font-semibold mb-2">Important Notes:</p>
           <ul className="text-xs space-y-1 list-disc list-inside">
             <li>Minimum withdrawal: 20 USDT</li>
             <li>Network fee: 1 USDT</li>
@@ -702,7 +702,7 @@ export default function Withdraw() {
       <Dialog open={showConfirmDialog} onOpenChange={setShowConfirmDialog}>
         <DialogContent className="[&>button]:hidden shadow-sm" onPointerDownOutside={e => e.preventDefault()}>
           <DialogHeader>
-            <DialogTitle>Confirm Transfer</DialogTitle>
+            <DialogTitle className="text-white">Confirm Transfer</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="flex justify-between items-center">
@@ -740,7 +740,7 @@ export default function Withdraw() {
       <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
         <DialogContent className="[&>button]:hidden shadow-sm" onPointerDownOutside={e => e.preventDefault()}>
           <DialogHeader className="mb-4">
-            <DialogTitle>Withdrawal Successful</DialogTitle>
+            <DialogTitle className="text-white">Withdrawal Successful</DialogTitle>
             <DialogDescription>
               Your withdrawal has been submitted successfully. Once verified and approved, the amount will be credited to your withdrawal wallet.
             </DialogDescription>
@@ -757,7 +757,7 @@ export default function Withdraw() {
       <Dialog open={showQrScanner} onOpenChange={handleCloseScanner}>
         <DialogContent className="[&>button]:hidden shadow-sm" onPointerDownOutside={e => e.preventDefault()}>
           <DialogHeader>
-            <DialogTitle>Scan QR Code</DialogTitle>
+            <DialogTitle className="text-white">Scan QR Code</DialogTitle>
             <DialogDescription className="text-brand-5/50">Position the QR code within the scanner frame</DialogDescription>
           </DialogHeader>
           {cameraError ? (

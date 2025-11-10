@@ -301,7 +301,12 @@ export default function SubscriptionPlan() {
 
   return (
     <>
-    <h2 className="text-lg md:text-xl lg:text-2xl font-semibold mb-3">My Subscription Plan</h2>
+    <div className="animate-slide-up">
+          <h1 className="text-3xl font-bold mb-2">
+            <span className="meta-text">Subscription Plan</span>
+          </h1>
+          {/* <p className="text-muted-foreground">View and manage your referral network</p> */}
+        </div>
       <div className="flex flex-col gap-6 my-6">
         {plans.map((plan) => {
           if (!planData[plan.name]?.enable) return null;
@@ -343,9 +348,9 @@ export default function SubscriptionPlan() {
               </CardContent>
               <CardFooter>
                 <Button 
-                  variant="primary"
+                  variant="default"
                   size="xl" 
-                  className="w-full cursor-pointer"
+                  className="w-full cursor-pointer bg-gradient-to-r from-brand-1 to-brand-2 hover:from-brand-2 hover:to-brand-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(185,242,255,.15)]"
                   onClick={() => handleBuyNow(plan)}
                   //disabled={isDisabled}
                 >

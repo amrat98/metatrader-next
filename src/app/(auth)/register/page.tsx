@@ -221,12 +221,12 @@ function RegisterForm() {
 
   return (
     <>
-      <Card className="w-full text-left backdrop-blur-md bg-card/60">
+      <Card className="w-full text-left bg-brand-3 backdrop-blur-xl shadow-[0_0_20px_rgba(185,242,255,.15)]">
         <CardHeader className="text-center">
           <CardTitle>
             <h1 className="text-2xl">Sign Up</h1>
           </CardTitle>
-          <CardDescription className="text-foreground text-base mt-1">
+          <CardDescription className="text-muted-foreground text-base mt-1">
             <p>Create your account on Metatrader</p>
           </CardDescription>
         </CardHeader>
@@ -239,7 +239,7 @@ function RegisterForm() {
                   name="firstName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>First Name</FormLabel>
+                      <FormLabel className="text-sm font-medium text-slate-300">First Name</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="John"
@@ -266,7 +266,7 @@ function RegisterForm() {
                   name="lastName"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Last Name</FormLabel>
+                      <FormLabel className="text-sm font-medium text-slate-300">Last Name</FormLabel>
                       <FormControl>
                         <Input
                           placeholder="Doe"
@@ -294,7 +294,7 @@ function RegisterForm() {
                 name="nickName"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Username</FormLabel>
+                    <FormLabel className="text-sm font-medium text-slate-300">Username</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="johndoe"
@@ -321,7 +321,7 @@ function RegisterForm() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email</FormLabel>
+                    <FormLabel className="text-sm font-medium text-slate-300">Email</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
@@ -349,7 +349,7 @@ function RegisterForm() {
                 name="mobileNumber"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Phone Number</FormLabel>
+                    <FormLabel className="text-sm font-medium text-slate-300">Phone Number</FormLabel>
                     <FormControl>
                       <Input
                         type="tel"
@@ -377,7 +377,7 @@ function RegisterForm() {
                 name="invitationCode"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Referral Code</FormLabel>
+                    <FormLabel className="text-sm font-medium text-slate-300">Referral Code</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="Enter referral code"
@@ -417,22 +417,22 @@ function RegisterForm() {
                       />
                     </FormControl>
                     <div className="space-y-1 leading-none">
-                      <FormLabel className="inline-block leading-normal text-sm">
+                      <FormLabel className="inline-block leading-normal text-base font-medium text-slate-300">
                         I Accept The{" "}
                         <Link href={routes.terms}
-                          className="underline underline-offset-2"
+                          className="underline underline-offset-2 hover:text-brand-1"
                         >
                           Terms and Condition
                         </Link>
                         ,{" "}
                         <Link href={routes.privacy}
-                          className="underline underline-offset-2"
+                          className="underline underline-offset-2 hover:text-brand-1"
                         >
                           Privacy Policy</Link>
                         {" "}
                         and{" "}
                         <Link href={routes.userAgreement}
-                          className="underline underline-offset-2"
+                          className="underline underline-offset-2 hover:text-brand-1"
                         >
                           User Service Agreement</Link>
                         {" "}
@@ -457,7 +457,7 @@ function RegisterForm() {
                   variant: "primary",
                   size: "xl",
                   textSize: "xl",
-                  className: "w-full cursor-pointer",
+                  className: "w-full cursor-pointer transition-all duration-300 bg-gradient-to-r from-brand-1 to-brand-2 hover:from-brand-2 hover:to-brand-1 hover:scale-105 hover:shadow-[0_0_20px_rgba(185,242,255,.15)]",
                 })}
               >
                 {isLoading ? "Creating Account..." : isVerified ? "Registration Complete" : "Create Account"}

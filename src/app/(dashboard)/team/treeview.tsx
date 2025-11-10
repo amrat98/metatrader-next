@@ -3,12 +3,11 @@ import React, { useState, useEffect } from "react";
 import { useContext } from "react";
 import axios from "axios";
 import { apiConfig } from "@/lib/api-config";
-import { ChevronRight, ChevronDown, Search, User } from "lucide-react";
+import { ChevronRight, ChevronDown, Search, User, GitFork, Waypoints, Workflow } from "lucide-react";
 import { UserContext } from "@/lib/usercontent";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { AvatarImage, Avatar } from "@/components/ui/avatar";
 import {
@@ -28,6 +27,9 @@ import {
 } from "@/components/ui/select";
 import { formatPrice } from "@/lib/utils";
 import { Pagination } from "@/components/pagination";
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Skeleton } from "@/components/ui/skeleton";
 
 // Define User and ExpandedNodes types
 interface User {
@@ -245,6 +247,10 @@ export default function TreeView() {
     const hasFilteredChildren = filteredChildren.length > 0;
 
     return (
+      <>
+      {/* <div key={nodeKey} className="p-4 rounded-xl transition-all duration-300 border shadow-sm bg-gray-50 bg-gradient-to-b from-gray-50 to-brand-5/5">
+
+      </div> */}
       <div
         key={nodeKey}
         className={cn(
@@ -301,6 +307,7 @@ export default function TreeView() {
           </div>
         )}
       </div>
+      </>
     );
   };
 
@@ -417,65 +424,138 @@ export default function TreeView() {
   };
 
   return (
-    <div className="overflow-auto w-full border-2 border-primary p-5">
-      <div className="flex items-center justify-between flex-wrap gap-4 mb-3 sticky left-0">
-        <div className="flex items-center gap-2">
-          <User className="h-6 w-6" />
-          <h2 className="text-base lg:text-xl font-bold">Your Referral Network</h2>
-        </div>
-        <div className="flex items-center gap-4">
+    <>
+      <Tabs defaultValue="treeAll" value={activeTab} onValueChange={setActiveTab} className="gap-4">
+      <TabsList className="glass-effect shadow-sm w-full h-auto p-1 overflow-auto justify-normal gap-2 meta-shine meta-border" >
+        <TabsTrigger value="treeAll" className="dark:data-[state=active]:meta-shine dark:data-[state=active]:text-brand-2 border-0 p-2 px-4 cursor-pointer dark:hover:meta-shine dark:hover:text-brand-2">
+          <Waypoints className="size-5" />
+          Tree view
+        </TabsTrigger>
+        <TabsTrigger value="treeA" className="dark:data-[state=active]:meta-shine dark:data-[state=active]:text-brand-2 border-0 p-2 px-4 cursor-pointer dark:hover:meta-shine dark:hover:text-brand-2">
+          <Workflow className="size-5" />
+          Tree Team A
+        </TabsTrigger>
+        <TabsTrigger value="treeB" className="dark:data-[state=active]:meta-shine dark:data-[state=active]:text-brand-2 border-0 p-2 px-4 cursor-pointer dark:hover:meta-shine dark:hover:text-brand-2">
+          <Workflow className="size-5" />
+          Tree Team B
+        </TabsTrigger>
+      </TabsList>
+      <Card className="gap-0">
+        <CardHeader className="gap-0">
+          <div className="flex flex-wrap gap-5 justify-between">
+          <div>
+          <CardTitle className="text-white text-lg lg:text-2xl font-bold">Team Tree Structure</CardTitle>
+          <CardDescription className="text-slate-400 font-medium">Click arrows to expand/collapse team members</CardDescription>
+          </div>
+          <div className="mt-2 mb-4 text-right flex flex-nowrap items-center gap-2">
           <Input
-            type="search"
-            placeholder="Search users..."
-            value={searchQuery}
-            onChange={handleSearch}
-            className="min-h-12 h-12 text-base flex-1"
-          />
-          <Select value={activeLevel} onValueChange={setActiveLevel}>
-            <SelectTrigger className="min-h-12 text-base  flex-1">
-              <SelectValue placeholder="Select Level" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All Levels</SelectItem>
-              {Array.from({ length: maxLevel + 1 }, (_, i) => (
-                <SelectItem key={i} value={i.toString()}>
-                  Level {i}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
-      </div>
-
-      <Tabs defaultValue="treeAll" value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <div className="overflow-auto pb-1">
-        <TabsList className="sticky left-0 bg-brand-2">
-          <TabsTrigger value="treeAll" className="data-[state=active]:bg-primary! data-[state=active]:text-background! cursor-pointer">All Team</TabsTrigger>
-          <TabsTrigger value="treeA" className="data-[state=active]:bg-primary! data-[state=active]:text-background! cursor-pointer">Tree A Team</TabsTrigger>
-          <TabsTrigger value="treeB" className="data-[state=active]:bg-primary! data-[state=active]:text-background! cursor-pointer">Tree B Team</TabsTrigger>
-          <TabsTrigger value="listA" className="data-[state=active]:bg-primary! data-[state=active]:text-background! cursor-pointer">List A Team</TabsTrigger>
-          <TabsTrigger value="listB" className="data-[state=active]:bg-primary! data-[state=active]:text-background! cursor-pointer">List B Team</TabsTrigger>
-        </TabsList>
-        </div>
-        <TabsContent value="treeAll" className="mt-4">
-          {data && filterTree(data, searchQuery) && renderUserItem(filterTree(data, searchQuery) as User, 0, true, 'root', 0)}
-        </TabsContent>
-        <TabsContent value="treeA" className="mt-4">
-          {data && filterTree(data, searchQuery) && renderUserItem(filterTree(data, searchQuery) as User, 0, true, 'root', 0)}
-        </TabsContent>
-        <TabsContent value="treeB" className="mt-4">
-          {data && filterTree(data, searchQuery) && renderUserItem(filterTree(data, searchQuery) as User, 0, true, 'root', 0)}
-        </TabsContent>
-        <TabsContent value="listA" className="mt-4">
-          {renderReferralList()}
-        </TabsContent>
-        <TabsContent value="listB" className="mt-4">
-          {renderReferralList()}
-        </TabsContent>
+              type="search"
+              placeholder="Search users..."
+              value={searchQuery}
+              onChange={handleSearch}
+              className="min-h-10 h-10 text-sm flex-1"
+            />
+            <Select value={activeLevel} onValueChange={setActiveLevel}>
+              <SelectTrigger className="min-h-10 text-sm flex-1">
+                <SelectValue placeholder="Select Level" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Levels</SelectItem>
+                {Array.from({ length: maxLevel + 1 }, (_, i) => (
+                  <SelectItem key={i} value={i.toString()}>
+                    Level {i}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <TabsContent value="treeAll" className="mt-4">
+          {isLoading && !data ? (
+            <>
+            {Array.from({ length: 4 }).map((_,i) => (
+              <div key={i} className="p-4 rounded-xl transition-all duration-300 border ">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                  <Skeleton className="size-10 rounded-full" />
+                  <div className="space-y-3">
+                    <Skeleton className="h-4 w-[250px] max-w-full" />
+                    <Skeleton className="h-4 w-[200px] max-w-full" />
+                  </div>
+                  </div>
+                  <div className="space-y-3">
+                    <Skeleton className="h-4 w-[100px] max-w-full" />
+                    <Skeleton className="h-4 w-[50px] max-w-full ml-auto" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+          ) : (
+            <>
+            {data && filterTree(data, searchQuery) && renderUserItem(filterTree(data, searchQuery) as User, 0, true, 'root', 0)}
+            </>
+          )}
+          </TabsContent>
+          <TabsContent value="treeA" className="mt-4">
+          {isLoading && !data ? (
+            <>
+            {Array.from({ length: 4 }).map((_,i) => (
+              <div key={i} className="p-4 rounded-xl transition-all duration-300 border ">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                  <Skeleton className="size-10 rounded-full" />
+                  <div className="space-y-3">
+                    <Skeleton className="h-4 w-[250px] max-w-full" />
+                    <Skeleton className="h-4 w-[200px] max-w-full" />
+                  </div>
+                  </div>
+                  <div className="space-y-3">
+                    <Skeleton className="h-4 w-[100px] max-w-full" />
+                    <Skeleton className="h-4 w-[50px] max-w-full ml-auto" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+          ) : (
+            <>
+            {data && filterTree(data, searchQuery) && renderUserItem(filterTree(data, searchQuery) as User, 0, true, 'root', 0)}
+            </>
+          )}
+          </TabsContent>
+          <TabsContent value="treeB" className="mt-4">
+          {isLoading && !data ? (
+            <>
+            {Array.from({ length: 4 }).map((_,i) => (
+              <div key={i} className="p-4 rounded-xl transition-all duration-300 border ">
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-3">
+                  <Skeleton className="size-10 rounded-full" />
+                  <div className="space-y-3">
+                    <Skeleton className="h-4 w-[250px] max-w-full" />
+                    <Skeleton className="h-4 w-[200px] max-w-full" />
+                  </div>
+                  </div>
+                  <div className="space-y-3">
+                    <Skeleton className="h-4 w-[100px] max-w-full" />
+                    <Skeleton className="h-4 w-[50px] max-w-full ml-auto" />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </>
+          ) : (
+            <>
+            {data && filterTree(data, searchQuery) && renderUserItem(filterTree(data, searchQuery) as User, 0, true, 'root', 0)}
+            </>
+          )}
+          </TabsContent>
+        </CardContent>
+      </Card>
       </Tabs>
-      {isLoading && !data && (
-        <div className="text-center py-8 text-muted-foreground text-lg font-semibold">Loading...</div>
-      )}
-    </div>
+    </>
   );
 }
