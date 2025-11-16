@@ -303,6 +303,9 @@ export default function Withdraw() {
   const handleConfirm = async () => {
     if (confirmLoading) return;
     setConfirmLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // Delay 5 sec
+    
     try {
       const response = await axios.put(
         apiConfig.assets.confirmTransaction,
@@ -540,7 +543,8 @@ export default function Withdraw() {
                   placeholder="Enter Deposit Address"
                   className={`h-14 text-base pr-14 ${errors.address ? 'border-red-500' : ''}`}
                   required
-                  disabled={isVerifying}
+                  disabled={isVerifying || isVerified}
+                  readOnly={isVerified}
                 />
                 <TooltipProvider>
                   <Tooltip open={showTooltip}>
@@ -550,7 +554,7 @@ export default function Withdraw() {
                         variant="link"
                         size="icon"
                         className="size-10 shrink-0 cursor-pointer text-brand-2"
-                        disabled={isVerifying || qrLoading}
+                        disabled={isVerifying || qrLoading || isVerified}
                         onClick={handleQrCode}
                       >
                         {qrLoading ? "Loading..." : <QrCode className="size-5" />}
@@ -583,7 +587,8 @@ export default function Withdraw() {
                 placeholder="Enter Amount"
                 className={`h-14 text-base pr-25 ${errors.amount ? 'border-red-500' : ''}`}
                 required
-                disabled={isVerifying}
+                disabled={isVerifying || isVerified}
+                readOnly={isVerified}
               />
               <Button
                 type="button"
@@ -591,7 +596,7 @@ export default function Withdraw() {
                 size="lg"
                 className="shrink-0 cursor-pointer absolute right-2 top-2 text-sm bg-brand-2"
                 onClick={handleMaxAmount}
-                disabled={isVerifying}
+                disabled={isVerifying || isVerified}
               >
                 Max
               </Button>
@@ -618,7 +623,8 @@ export default function Withdraw() {
                 placeholder="Enter Transaction Password"
                 className={`h-14 text-base ${errors.transactionPassword ? 'border-red-500' : ''}`}
                 required
-                disabled={isVerifying}
+                readOnly={isVerified}
+                disabled={isVerifying || isVerified}
               />
             </div>
             {errors.transactionPassword && <p className="text-red-500 text-sm mt-1">{errors.transactionPassword}</p>}
@@ -633,7 +639,7 @@ export default function Withdraw() {
                   textSize="xs" 
                   className="cursor-pointer"
                   onClick={handleGetCode}
-                  disabled={resendTimer > 0 || getCodeLoading}
+                  disabled={resendTimer > 0 || getCodeLoading || isVerified}
                 >
                   {getCodeLoading ? "Sending..." : resendTimer > 0 ? `Resend (${resendTimer}s)` : 'Resend'}
                 </Button>

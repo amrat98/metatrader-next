@@ -46,6 +46,7 @@ interface UserProfile {
     invitationCode: string;
     ivtId: string;
     fxAccountBalance: number;
+    fxAccountIB: string;
     fxAccountNumber: string;
     fxAccountStatus: string;
     fxAcountProfit: string;

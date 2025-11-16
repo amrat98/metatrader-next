@@ -145,16 +145,16 @@ const CreditCard: React.FC<CreditCardProps> = ({ profile }) => {
                     setSubmitted(true);
                     setShowDialog(false);
                     // Optionally update profile in context
-                    if (typeof setProfile === 'function' && profile && profile.userResult) {
-                      setProfile({
-                        ...profile,
-                        userResult: {
-                          ...profile.userResult,
-                          fxAccountNumber,
-                          fxAccountStatus: "PENDING"
-                        }
-                      });
-                    }
+                    // if (typeof setProfile === 'function' && profile && profile.userResult) {
+                    //   setProfile({
+                    //     ...profile,
+                    //     userResult: {
+                    //       ...profile.userResult,
+                    //       fxAccountNumber,
+                    //       fxAccountStatus: "PENDING"
+                    //     }
+                    //   });
+                    // }
                   } else {
                     setError(response.data.responseMessage || "Failed to update FX Account Number");
                   }

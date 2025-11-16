@@ -69,6 +69,7 @@ export async function middleware(request: NextRequest) {
   request.nextUrl.pathname.startsWith(routes.income) ||
   request.nextUrl.pathname.startsWith(routes.assets) ||
   request.nextUrl.pathname.startsWith(routes.profile) ||
+  request.nextUrl.pathname.startsWith(routes.linkAccount) ||
   request.nextUrl.pathname.startsWith(routes.subscription) ||
   request.nextUrl.pathname.startsWith(routes.support)
 

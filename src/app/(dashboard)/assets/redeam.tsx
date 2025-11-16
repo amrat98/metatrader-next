@@ -96,6 +96,11 @@ export default function Redeam() {
       return;
     }
 
+    if (isLoading) return;
+    setIsLoading(true);
+
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // Delay 5 sec
+
     try {
       setIsLoading(true);
       const response = await axios.post(

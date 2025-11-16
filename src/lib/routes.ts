@@ -17,4 +17,5 @@ export const routes = {
   terms: "/terms-conditions",
   userAgreement: "/user-agreement",
   support: "/support",
+  linkAccount: "/link-account"
 };

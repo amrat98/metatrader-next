@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Share2, Copy, House, Network, BanknoteArrowDown, BanknoteArrowUp, Wallet, Headset, CreditCard, LogOut, Gift, Gem, User, Link2 } from "lucide-react";
+import { Share2, Copy, House, Network, BanknoteArrowDown, BanknoteArrowUp, Wallet, Headset, CreditCard, LogOut, Gift, Gem, User, Link2, Cable } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
@@ -74,6 +74,12 @@ const data = {
       title: "My Profile",
       url: `${routes.profile}`,
       icon: User,
+      bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-1 hover:to-brand-2  data-[active=true]:from-brand-1 data-[active=true]:to-brand-2"
+    },
+    {
+      title: "Link Accounts",
+      url: `${routes.linkAccount}`,
+      icon: Cable,
       bgColor: "bg-gradient-to-br data-[active=true]:text-white hover:text-white hover:from-brand-1 hover:to-brand-2  data-[active=true]:from-brand-1 data-[active=true]:to-brand-2"
     },
     // {
