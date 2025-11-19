@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { buttonVariants } from "@/components/ui/button";
 import { routes } from "@/lib/routes";
+import { TrendingUp } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -11,15 +12,17 @@ export default function NotFound() {
       </div>
       <div className="min-h-screen flex items-center justify-center">
         <div className="container max-w-2xl text-center px-4">
-          <Image
-            className="w-full max-w-40 xl:max-w-60 mx-auto mb-10"
-            src="/logo.png"
-            alt="IBC"
-            width={336}
-            height={80}
-            priority
-          />
-          <h1 className="text-6xl font-bold text-primary mb-4">404</h1>
+        <div className="mb-14">
+          <Link href={routes.home} className="flex items-center justify-center gap-3">
+              <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-amber-500 rounded-lg flex items-center justify-center">
+                <TrendingUp className="w-6 h-6 text-white" />
+              </div>
+              <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">
+                Billionaire's Blueprint
+              </span>
+            </Link>
+          </div>
+          <h1 className="text-6xl font-bold mb-4 bg-gradient-to-r from-blue-400 via-amber-400 to-blue-400 bg-clip-text text-transparent">404</h1>
           <h2 className="text-2xl font-semibold mb-4">Page Not Found</h2>
           <p className="text-muted-foreground mb-8">
             Oops! The page you're looking for doesn't exist or has been moved.
@@ -31,6 +34,7 @@ export default function NotFound() {
                 variant: "primary",
                 size: "xl",
                 textSize: "xl",
+                className: "border-0 text-white group px-8 py-4 bg-gradient-to-r from-blue-600 to-amber-600 rounded-lg font-bold text-lg hover:scale-105 transition-all duration-200 shadow-2xl shadow-blue-500/50 hover:shadow-amber-500/50"
               })}
             >
               Go Home

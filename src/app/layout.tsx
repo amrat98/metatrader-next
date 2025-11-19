@@ -18,9 +18,9 @@ const michroma = Michroma({
 });
 
 export const metadata: Metadata = {
-  title: "Metatrader - Trade Smartly & Securely",
+  title: "Billionaire's Blueprint - Trade Smartly & Securely",
   description:
-    "Welcome to Metatrader. Your all-in-one platform for smart, secure, and fast trading. Join now and take control of your investments.",
+    "Welcome to Billionaire's Blueprint. Your all-in-one platform for smart, secure, and fast trading. Join now and take control of your investments.",
 };
 
 export default function RootLayout({

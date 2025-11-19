@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Share2, Copy, House, Network, BanknoteArrowDown, BanknoteArrowUp, Wallet, Headset, CreditCard, LogOut, Gift, Gem, User, Link2, Cable } from "lucide-react";
+import { Share2, Copy, House, Network, BanknoteArrowDown, BanknoteArrowUp, Wallet, Headset, CreditCard, LogOut, Gift, TrendingUp, User, Link2, Cable } from "lucide-react";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Separator } from "@/components/ui/separator";
@@ -355,7 +355,7 @@ function NavDoc() {
       </div>
 
       </div>
-      <SharePopup open={sharePopupOpen} onClose={() => setSharePopupOpen(false)} link={shareLink} title="Join me on MetaTrader!" description="Register using my referral link." />
+      <SharePopup open={sharePopupOpen} onClose={() => setSharePopupOpen(false)} link={shareLink} title="Join me on Billionaire's Blueprint!" description="Register using my referral link." />
     </Suspense>
   );
 }
@@ -379,11 +379,11 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <SidebarMenuItem>
         <SidebarMenuButton asChild className="h-auto p-0 hover:bg-transparent">
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-brand-1 to-brand-2 flex items-center justify-center shadow-[0_0_20px_rgba(185,242,255,.15)]">
-            <Gem className="w-6 h-6 text-black" />
+          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-brand-1 to-brand-2 flex items-center justify-center shadow-[0_0_20px_rgba(185,242,255,.15)]">
+            <TrendingUp className="size-5 text-black" />
           </div>
           <div>
-            <h1 className="font-bold text-lg bg-gradient-to-r from-brand-1 to-brand-2 bg-clip-text text-transparent">MetaTrader</h1>
+            <h1 className="font-bold text-md bg-gradient-to-r from-brand-1 to-brand-2 bg-clip-text text-transparent">Billionaire's Blueprint</h1>
             <p className="text-xs text-muted-foreground">Premium Trading</p>
           </div>
         </div>

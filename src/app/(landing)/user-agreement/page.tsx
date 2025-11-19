@@ -9,8 +9,8 @@ export default function UserAgreementPage() {
           <section className="py-8 xl:py-12">
             <div className="container mx-auto px-4 max-w-5xl">
               <div className="mb-8 text-center">
-                <h1 className="text-3xl font-bold mb-2">User Agreement (Metatrader Investment Platform)</h1>
-                <p className="text-sm text-muted-foreground">This User Agreement ("Agreement") outlines the rights and obligations between Metatrader and the user.</p>
+                <h1 className="text-3xl font-bold mb-2">User Agreement (Billionaire's Blueprint Investment Platform)</h1>
+                <p className="text-sm text-muted-foreground">This User Agreement ("Agreement") outlines the rights and obligations between Billionaire's Blueprint and the user.</p>
               </div>
               <div className="space-y-8  p-6 bg-gradient-to-br from-slate-900/90 to-slate-800/90 border border-blue-500/30 rounded-3xl backdrop-blur-lg shadow-2xl">
                 <section>
@@ -21,7 +21,7 @@ export default function UserAgreementPage() {
                   <h2 className="text-xl font-semibold mb-2">2. Regulatory Compliance</h2>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>You are solely responsible for determining whether your use of the platform is legal in your jurisdiction.</li>
-                    <li>Residents of India are prohibited from investing on Metatrader.</li>
+                    <li>Residents of India are prohibited from investing on Billionaire's Blueprint.</li>
                   </ul>
                 </section>
                 <section>
@@ -30,7 +30,7 @@ export default function UserAgreementPage() {
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">4. Investment Disclaimer</h2>
-                  <p>Metatrader does not guarantee any return on investment. All decisions are made at your sole discretion and risk.</p>
+                  <p>Billionaire's Blueprint does not guarantee any return on investment. All decisions are made at your sole discretion and risk.</p>
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">5. Dispute Resolution</h2>

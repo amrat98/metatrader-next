@@ -9,9 +9,9 @@ export default function PrivacyPolicyPage() {
           <section className="py-8 xl:py-12">
             <div className="container mx-auto px-4 max-w-5xl">
               <div className="mb-8 text-center">
-                <h1 className="text-3xl font-bold mb-2">Privacy Policy (Metatrader Investment Platform)</h1>
+                <h1 className="text-3xl font-bold mb-2">Privacy Policy (Billionaire's Blueprint Investment Platform)</h1>
                 <p className="text-sm text-muted-foreground">Effective Date: 03-July-2025</p>
-                <p className="mt-2">Metatrader is committed to protecting your privacy. This policy outlines how we collect, use, store, and share your data.</p>
+                <p className="mt-2">Billionaire's Blueprint is committed to protecting your privacy. This policy outlines how we collect, use, store, and share your data.</p>
               </div>
               <div className="space-y-8 p-6 bg-gradient-to-br from-slate-900/90 to-slate-800/90 border border-blue-500/30 rounded-3xl backdrop-blur-lg shadow-2xl">
                 <section>
@@ -41,7 +41,7 @@ export default function PrivacyPolicyPage() {
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">5. Cookies</h2>
-                  <p>Metatrader uses cookies to enhance user experience and collect statistical data. You may disable cookies in your browser settings.</p>
+                  <p>Billionaire's Blueprint uses cookies to enhance user experience and collect statistical data. You may disable cookies in your browser settings.</p>
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">6. Your Rights</h2>

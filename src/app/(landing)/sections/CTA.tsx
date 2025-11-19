@@ -84,7 +84,7 @@ export function CTA() {
                       <Mail className="w-5 h-5 text-blue-400" />
                       <span className="text-sm text-slate-400">Email</span>
                     </div>
-                    <p className="text-white font-semibold ml-8">info@metatraderinstitute.com</p>
+                    <p className="text-white font-semibold ml-8">info@billionairesblueprint.com</p>
                   </div>
 
                   <div className="p-4 bg-white/5 rounded-xl border border-white/10 hover:border-blue-500/50 transition-colors">

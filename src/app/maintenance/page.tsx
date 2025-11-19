@@ -79,7 +79,7 @@ export default function MaintenancePage() {
             <TrendingUp className="w-6 h-6 text-white" />
           </div>
           <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">
-            Metatrader Institute
+            Billionaire's Blueprint
           </span>
         </Link>
       </div>
@@ -137,7 +137,7 @@ export default function MaintenancePage() {
         <p>
           If you need immediate assistance, please contact our support team.
         </p>
-        <p className="mt-2">Email: info@metatraderinstitute.com</p>
+        <p className="mt-2">Email: info@billionairesblueprint.com</p>
       </div>
     </div>
   );

@@ -149,7 +149,7 @@ function LoginFormContent() {
             <h1 className="text-2xl">Sign In</h1>
           </CardTitle>
           <CardDescription className="text-muted-foreground text-base mt-1">
-            <p>Welcome back to Metatrader</p>
+            <p>Welcome back to Billionaire's Blueprint</p>
           </CardDescription>
         </CardHeader>
         <CardContent>

@@ -227,7 +227,7 @@ function RegisterForm() {
             <h1 className="text-2xl">Sign Up</h1>
           </CardTitle>
           <CardDescription className="text-muted-foreground text-base mt-1">
-            <p>Create your account on Metatrader</p>
+            <p>Create your account on Billionaire's Blueprint</p>
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -436,7 +436,7 @@ function RegisterForm() {
                         >
                           User Service Agreement</Link>
                         {" "}
-                        of Metatrader
+                        of Billionaire's Blueprint
                       </FormLabel>
                       {/* <FormMessage /> */}
                     </div>
