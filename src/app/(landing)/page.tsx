@@ -1,14 +1,12 @@
 "use client";
-import { Hero } from './sections/Hero';
-import { Problem } from './sections/Problem';
-import { WelcomingPackage } from './sections/WelcomingPackage';
-import { IncomePillars } from './sections/IncomePillars';
-import { RiskManagement } from './sections/RiskManagement';
-import { ProfitSharing } from './sections/ProfitSharing';
-import { LuxuryRewards } from './sections/LuxuryRewards';
-import { CTA } from './sections/CTA';
-import { Navigation } from './sections/Navigation';
-import { Footer } from './sections/Footer';
+import { Hero } from './sections/hero';
+import { Problem } from './sections/problem';
+import { WelcomingPackage } from './sections/welcomingpackage';
+import { IncomePillars } from './sections/incomepillars';
+import { RiskManagement } from './sections/riskmanagement';
+import { ProfitSharing } from './sections/profitsharing';
+import { LuxuryRewards } from './sections/luxuryrewards';
+import { CTA } from './sections/cta';
 
 
 export default function Home() {

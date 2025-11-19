@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Navigation } from './sections/Navigation';
-import { Footer } from './sections/Footer';
+import { Navigation } from './sections/navigation';
+import { Footer } from './sections/footer';
 
 export default function LandingPageLayout({
   children,
