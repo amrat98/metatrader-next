@@ -1,31 +1,27 @@
 "use client";
-import Header from "../(landing)/sections/header";
-import Footer from "../(landing)/sections/footer";
-
 import React from "react";
 
 export default function TermsPage() {
   return (
     <>
       <div className="flex flex-col min-h-screen overflow-x-hidden pt-36">
-        <Header />
         <main className="flex-1">
           <section className="py-8 xl:py-12">
             <div className="container mx-auto px-4 max-w-5xl">
               <div className="mb-8 text-center">
-                <h1 className="text-3xl font-bold mb-2">Terms &amp; Conditions (IBC Investment Platform)</h1>
+                <h1 className="text-3xl font-bold mb-2">Terms &amp; Conditions (Metatrader Investment Platform)</h1>
                 <p className="text-sm text-muted-foreground">Last Updated: 03-July-2025</p>
               </div>
-              <div className="space-y-8 bg-card border rounded-lg p-6 shadow">
+              <div className="space-y-8  p-6 bg-gradient-to-br from-slate-900/90 to-slate-800/90 border border-blue-500/30 rounded-3xl backdrop-blur-lg shadow-2xl">
                 <section>
                   <h2 className="text-xl font-semibold mb-2">1. Introduction</h2>
-                  <p>Welcome to IBC. By accessing or using our platform, you agree to comply with and be bound by these Terms &amp; Conditions. If you do not agree, please do not use our services.</p>
+                  <p>Welcome to Metatrader. By accessing or using our platform, you agree to comply with and be bound by these Terms &amp; Conditions. If you do not agree, please do not use our services.</p>
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">2. Eligibility</h2>
                   <ul className="list-disc pl-6 space-y-1">
                     <li>You must be at least 18 years of age and legally capable of forming a binding contract in your jurisdiction.</li>
-                    <li>Residents of India are strictly prohibited from investing on this platform. Any investment made by Indian users is done at their own risk. IBC is not responsible for any legal consequences arising from such activity.</li>
+                    <li>Residents of India are strictly prohibited from investing on this platform. Any investment made by Indian users is done at their own risk. Metatrader is not responsible for any legal consequences arising from such activity.</li>
                   </ul>
                 </section>
                 <section>
@@ -38,15 +34,15 @@ export default function TermsPage() {
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">5. Prohibited Use</h2>
-                  <p>You agree not to use IBC for any unlawful, unauthorized, or unethical activities including money laundering, terrorism financing, or any form of market manipulation.</p>
+                  <p>You agree not to use Metatrader for any unlawful, unauthorized, or unethical activities including money laundering, terrorism financing, or any form of market manipulation.</p>
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">6. Intellectual Property</h2>
-                  <p>All content, branding, and intellectual property on IBC is owned by or licensed to IBC. No part of the platform may be reproduced without written permission.</p>
+                  <p>All content, branding, and intellectual property on Metatrader is owned by or licensed to Metatrader. No part of the platform may be reproduced without written permission.</p>
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">7. Limitation of Liability</h2>
-                  <p>IBC is not liable for any loss or damage incurred as a result of your use of the platform, including but not limited to loss of profits, data, or any indirect or consequential losses.</p>
+                  <p>Metatrader is not liable for any loss or damage incurred as a result of your use of the platform, including but not limited to loss of profits, data, or any indirect or consequential losses.</p>
                 </section>
                 <section>
                   <h2 className="text-xl font-semibold mb-2">8. Governing Law</h2>
@@ -56,7 +52,6 @@ export default function TermsPage() {
             </div>
           </section>
         </main>
-        <Footer />
       </div>
     </>
   );

@@ -1,43 +1,22 @@
-"use client";
-import Link from "next/link";
-import Image from "next/image";
-import { routes } from "@/lib/routes";
-import { FadeBlock } from "../fadeanimation";
+import { routes } from '@/lib/routes';
+import Link from 'next/link';
 
-export default function Footer() {
+export function Footer() {
   return (
-    <footer className="bg-slate-800 py-10">
-      <div className="container mb-20 flex flex-col lg:flex-row gap-5 justify-between">
-        <div>
-          <h3 className="text-lg text-primary">Connect</h3>
-          <h4 className="text-2xl font-michroma mb-4">Let's Stay Connected</h4>
-          <Link href={routes.home}>
-            <Image
-              className="w-full max-w-50 lg:max-w-100 "
-              src="/new-logo.png"
-              alt="IBC"
-              width={660}
-              height={115}
-            />
-          </Link>
-        </div>
-        <div className="lg:max-w-1/2">
-        <h3 className="text-lg mb-2 font-semibold">Have questions or eager to know more?</h3>
-        <p className="text-muted-foreground">Connect with us. We're here to guide you through the exciting world of IBC.</p>
-        </div>
-      </div>
-      <div className="container flex flex-wrap flex-col sm:flex-row sm:flex-nowrap gap-3 justify-between items-center">
-        <p className="text-xs md:text-sm text-muted-foreground">
-          © 2025 IBC, All rights reserved.
-        </p>
-        <div className="flex gap-2 flex-wrap justify-center sm:justify-end text-xs md:text-sm text-muted-foreground">
+    <section className="py-16 px-6 relative overflow-hidden">
+      <div className="max-w-6xl mx-auto relative z-10">
+        <div className="text-center text-slate-500 text-sm transform">
+          <p>© 2025 Metatrader Institute. All rights reserved.</p>
+          <div className="flex flex-wrap gap-2 text-sm text-slate-500 justify-center mt-3">
           <Link href={routes.privacy} className="hover:underline">Privacy Policy</Link>
           <span>|</span>
           <Link href={routes.terms} className="hover:underline">Terms &amp; Conditions</Link>
           <span>|</span>
           <Link href={routes.userAgreement} className="hover:underline">User Agreement</Link>
         </div>
+          <p className="mt-2">Building wealth through innovation, technology, and community.</p>
+        </div>
       </div>
-    </footer>
+    </section>
   );
 }

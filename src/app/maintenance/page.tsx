@@ -10,11 +10,12 @@ import {
 } from "@/components/ui/card";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import { AlertCircle, Clock, RefreshCw } from "lucide-react";
+import { AlertCircle, Clock, RefreshCw, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
 import { apiConfig } from "@/lib/api-config";
 import { useRouter } from "next/navigation";
+import { routes } from "@/lib/routes";
 
 export default function MaintenancePage() {
   const [timeLeft, setTimeLeft] = useState<number>(0);
@@ -71,21 +72,21 @@ export default function MaintenancePage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen p-4">
       <div className="mb-14">
-        <Image
-          className="inline-block w-full max-w-50 lg:max-w-60 xl:max-w-80"
-          src="/logo.png"
-          alt="IBC"
-          width={336}
-          height={80}
-          priority
-        />
+      <Link href={routes.home} className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-amber-500 rounded-lg flex items-center justify-center">
+            <TrendingUp className="w-6 h-6 text-white" />
+          </div>
+          <span className="text-xl font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent">
+            Metatrader Institute
+          </span>
+        </Link>
       </div>
-      <Card className="w-full max-w-2xl text-center backdrop-blur-md bg-card/60">
+      <Card className="w-full max-w-2xl text-center p-6 bg-gradient-to-br from-slate-900/90 to-slate-800/90 border border-blue-500/30 rounded-3xl backdrop-blur-lg shadow-2xl">
         <CardHeader className="space-y-4">
           <div className="flex justify-center">
-            <AlertCircle className="h-16 w-16 text-primary" />
+            <AlertCircle className="h-16 w-16 text-destructive" />
           </div>
           <CardTitle className="text-3xl font-bold">
             Under Maintenance
@@ -124,7 +125,7 @@ export default function MaintenancePage() {
               variant="primary" 
               size="lg"
               onClick={() => router.push('/')}
-              className="cursor-pointer"
+              className="cursor-pointer bg-gradient-to-r from-blue-600 to-amber-600 border-0 text-white"
             >
               Return to Home
             </Button>
@@ -136,7 +137,7 @@ export default function MaintenancePage() {
         <p>
           If you need immediate assistance, please contact our support team.
         </p>
-        <p className="mt-2">Email: support@IBC.com</p>
+        <p className="mt-2">Email: info@metatraderinstitute.com</p>
       </div>
     </div>
   );

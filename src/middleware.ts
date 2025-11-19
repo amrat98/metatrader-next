@@ -24,9 +24,9 @@ async function getMaintenanceStatus() {
 }
 
 export async function middleware(request: NextRequest) {
-  if (request.nextUrl.pathname === '/') {
-    return NextResponse.redirect(new URL(routes.login, request.url));
-  }
+  // if (request.nextUrl.pathname === '/') {
+  //   return NextResponse.redirect(new URL(routes.login, request.url));
+  // }
   // Custom redirects
   // if (request.nextUrl.pathname === '/home') {
   //   return NextResponse.redirect(new URL(routes.login, request.url));
@@ -39,7 +39,7 @@ export async function middleware(request: NextRequest) {
   // }
 
   // Allow access to maintenance page and landing page
-  if (request.nextUrl.pathname === routes.maintenance || request.nextUrl.pathname === routes.home) {
+  if (request.nextUrl.pathname === routes.maintenance) {
     return NextResponse.next()
   }
 

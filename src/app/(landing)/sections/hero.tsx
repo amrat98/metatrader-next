@@ -1,161 +1,96 @@
-"use client";
-import Link from "next/link";
-import { buttonVariants } from "@/components/ui/button";
-import Image from "next/image";
-import { routes } from "@/lib/routes";
+import { TrendingUp, Sparkles } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
-import Spline from "@splinetool/react-spline"
-import { FadeBlock } from "../fadeanimation";
-import LightRays from '../LightRays';
+export function Hero() {
+  const [isVisible, setIsVisible] = useState(false);
 
-export default function HeroSection() {
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
-    <>
-    <div className="fixed top-0 w-full h-dvh z-10 pointer-events-none">
-      <LightRays
-        raysOrigin="top-center"
-        raysColor="#00ffff"
-        raysSpeed={1.5}
-        lightSpread={0.8}
-        rayLength={1.2}
-        followMouse={true}
-        mouseInfluence={0.1}
-        noiseAmount={0.1}
-        distortion={0.05}
-        className="custom-rays"
-      />
-    </div>
-    <section className="container pt-5 pb-8 xl:pb-12 min-h-[50vh] flex flex-col lg:flex-row justify-center items-center">
-      <FadeBlock delay={0.1} direction="right" className="relative z-[1] text-center lg:text-left">
-        <h2 className="text-3xl lg:text-4xl/12 font-michroma">
-          Your Trusted <span className="text-primary">Global PAMM & Portfolio</span> Management Partner
-        </h2>
-      </FadeBlock>
-      <FadeBlock delay={0.2} className="min-w-2/5 aspect-square relative lg:-right-[10%] pointer-events-none">
-      <Spline
-        scene="https://prod.spline.design/G2CMubq6VcssT1gZ/scene.splinecode" 
-      />
-      </FadeBlock>
-      <FadeBlock delay={0.1} direction="left" className="text-center lg:text-right ml-auto relative z-[1]">
-      <p className="text-base text-foreground font-semibold uppercase mt-4">
-            Smarter Trading. Faster Growth. Secure Investments.
-          </p>
-          <p className="text-sm mt-4 text-foreground leading-6">
-            Unlock the power of AI-driven trading precision and expert portfolio management with FX. 
-            Our advanced PAMM model blends automated strategies with human expertise to deliver 
-            consistent returns while keeping your capital safe and accessible.
-          </p>
-      </FadeBlock>
-    </section>
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-40 md:pt-30 lg:pt-20">
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-blue-950/20 to-slate-950" />
 
-
-
-    {/* <section className="container pt-5 pb-8 xl:pb-12 min-h-dvh flex justify-center">
-      <FadeBlock delay={0.4} className="min-w-1/2 aspect-square">
-      <Spline
-        scene="https://prod.spline.design/G2CMubq6VcssT1gZ/scene.splinecode" 
-      />
-      </FadeBlock>
-      <div className="">
-        <h2 className="text-4xl/12 lg:text-5xl/14 xl:text-6xl/18 font-michroma text-center">
-          Your Trusted <span className="text-primary">Global PAMM & Portfolio</span> Management Partner
-        </h2>
-        <div className="text-center md:text-right md:max-w-2/3 lg:max-w-1/2 ml-auto">
-          <p className="text-base text-muted-foreground font-semibold uppercase mt-4">
-            Smarter Trading. Faster Growth. Secure Investments.
-          </p>
-          <p className="text-sm mt-4 text-muted-foreground leading-6">
-            Unlock the power of AI-driven trading precision and expert portfolio management with FX. 
-            Our advanced PAMM model blends automated strategies with human expertise to deliver 
-            consistent returns while keeping your capital safe and accessible. With no direct deposits 
-            required, you retain full control of your funds while our professional traders work to 
-            maximize your earnings. Enjoy seamless withdrawals, risk-mitigated strategies, and a 
-            transparent investment experience designed for your financial success.
-          </p>
-        </div>
+      <div className="absolute inset-0 opacity-30">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl animate-pulse" />
+        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-amber-500/20 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
-    </section> */}
-      <section className="container flex flex-col md:flex-row md:flex-wrap justify-center items-center gap-8 text-center md:text-left">
-      <FadeBlock delay={0.1} className="flex flex-col gap-1">
-        <span className="font-michroma text-muted-foreground uppercase text-sm">Intelligent</span>
-        <span className="font-michroma text-white text-3xl">
-          Trading<span className="size-1.5 inline-block ml-0.5 bg-primary"></span>
-        </span>
-      </FadeBlock>
-      <FadeBlock delay={0.1} className="flex flex-col gap-1">
-        <span className="font-michroma text-muted-foreground uppercase text-sm">Reliable</span>
-        <span className="font-michroma text-white text-3xl">
-          Growth<span className="size-1.5 inline-block ml-0.5 bg-primary"></span>
-        </span>
-      </FadeBlock>
-      <FadeBlock delay={0.1} className="flex flex-col gap-1">
-        <span className="font-michroma text-muted-foreground uppercase text-sm">Optimized</span>
-        <span className="font-michroma text-white text-3xl">
-          Returns<span className="size-1.5 inline-block ml-0.5 bg-primary"></span>
-        </span>
-      </FadeBlock>
-      <FadeBlock delay={0.2} className="mt-10 lg:mt-0 lg:ml-20">
-        <Link
-          href={routes.login}
-          className="flex py-3 px-12 whitespace-nowrap items-center text-lg uppercase font-semibold border border-dashed bg-sky-400/10 text-primary border-primary relative hover:bg-sky-400/30"
+
+      <div className="absolute inset-0">
+        {[...Array(50)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-blue-400/30 rounded-full animate-pulse"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 3}s`,
+              animationDuration: `${2 + Math.random() * 3}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+        <div
+          className={`transform transition-all duration-1000 ${
+            isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+          }`}
         >
-          Start Your PAMM Journey
-          <div className="animate-corner size-2 border-t-2 border-l-2 border-primary absolute -top-[var(--corner)] -left-[var(--corner)]"></div>
-          <div className="animate-corner size-2 border-t-2 border-r-2 border-primary absolute -top-[var(--corner)] -right-[var(--corner)]"></div>
-          <div className="animate-corner size-2 border-b-2 border-l-2 border-primary absolute -bottom-[var(--corner)] -left-[var(--corner)]"></div>
-          <div className="animate-corner size-2 border-b-2 border-r-2 border-primary absolute -bottom-[var(--corner)] -right-[var(--corner)]"></div>
-        </Link>
-      </FadeBlock>
-    </section>
-    {/*
-    <section className="pt-5 pb-8 xl:pb-12">
-      <div className="container">
-        <div className="flex flex-col lg:flex-row gap-5 lg:gap-8 xl:gap-10 items-center">
-          <div className="section_header lg:text-left flex-1/2">
-            <h2 className="text-4xl/12 lg:text-5xl/14 xl:text-6xl/18 font-bold ">
-              Welcome to <span className="text-primary">IBC</span> Grow Your
-              Wealth with Confidence
-            </h2>
-            <p className="text-lg xl:text-xl font-semibold mt-4">
-              Join a next-generation platform that combines Human expertise, and
-              secure infrastructure to grow your money, passively and
-              predictably.
-            </p>
-            <Link
-              href={routes.register}
-              className={buttonVariants({
-                variant: "primary",
-                size: null,
-                textSize: null,
-                className:
-                  "max-w-fit mx-auto mt-3 lg:ml-0 h-14 xl:h-18 rounded-md px-8 xl:px-14 text-lg xl:text-2xl",
-              })}
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full mb-6 backdrop-blur-sm">
+            <Sparkles className="w-4 h-4 text-amber-400" />
+            <span className="text-sm text-blue-300">The Future of Trading & Wealth Creation</span>
+          </div>
+
+          <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-amber-400 to-blue-400 bg-clip-text text-transparent animate-gradient bg-300%">
+            The Billionaire's Blueprint
+          </h1>
+
+          <p className="text-xl md:text-2xl text-slate-300 mb-12 max-w-3xl mx-auto">
+            Where Elite Trading Meets Unmatched Affiliate Earning Power
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <button className="group px-8 py-4 bg-gradient-to-r from-blue-600 to-amber-600 rounded-lg font-bold text-lg hover:scale-105 transition-all duration-200 shadow-2xl shadow-blue-500/50 hover:shadow-amber-500/50">
+              Start Your Journey
+              <TrendingUp className="inline-block ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </button>
+
+            <button className="px-8 py-4 bg-white/5 border border-white/10 rounded-lg font-bold text-lg hover:bg-white/10 transition-all duration-200 backdrop-blur-sm">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+          {[
+            { value: '7', label: 'Day Masterclass' },
+            { value: 'AI', label: 'Risk Management' },
+            { value: '$500', label: 'Funded Account' },
+            { value: '3', label: 'Income Streams' },
+          ].map((stat, i) => (
+            <div
+              key={i}
+              className="p-6 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 transform hover:scale-105 transition-all duration-300"
+              style={{
+                animation: `fadeInUp 0.6s ease-out ${i * 0.1}s both`,
+              }}
             >
-              Start Investing Now
-            </Link>
-          </div>
-          <div className="flex-1/2 relative">
-            <Image
-              className="w-full absolute scale-[1.35] top-[20%] right-[-22%]"
-              src="/bull-bg.png"
-              alt="Bull bg"
-              width={1024}
-              height={1024}
-              priority
-            />
-            <Image
-              className="w-full mx-auto lg:mr-0 relative z-[1]"
-              src="/bull.png"
-              alt="IBC Bull coin"
-              width={1024}
-              height={1024}
-              priority
-            />
-          </div>
+              <div className="text-3xl font-bold bg-gradient-to-r from-blue-400 to-amber-400 bg-clip-text text-transparent mb-2">
+                {stat.value}
+              </div>
+              <div className="text-sm text-slate-400">{stat.label}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex items-start justify-center p-2">
+          <div className="w-1.5 h-1.5 bg-white/50 rounded-full animate-pulse" />
         </div>
       </div>
     </section>
-    */}
-    </>
   );
 }
