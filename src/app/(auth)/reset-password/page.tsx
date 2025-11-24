@@ -77,7 +77,14 @@ export default function ResetPasswordForm() {
         setApiError(response.data.responseMessage || "Failed to send OTP");
       }
     } catch (error) {
-      setApiError(error instanceof Error ? error.message : "Failed to send OTP. Please try again.");
+     // setApiError(error instanceof Error ? error.message : "Failed to send OTP. Please try again.");
+
+      if (axios.isAxiosError(error)) {
+        setApiError(error.response?.data?.responseMessage || "Failed to send OTP. Please try again.");
+      } else {
+        setApiError(error instanceof Error ? error.message : "Failed to send OTP. Please try again.");
+      }
+
     } finally {
       setIsLoading(false);
     }

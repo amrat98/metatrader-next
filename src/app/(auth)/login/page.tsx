@@ -135,7 +135,12 @@ function LoginFormContent() {
         setIsLoading(false);
       }
     } catch (error) {
-      setLoginError(error instanceof Error? error.message : "Invalid username or password");
+      //setLoginError(error instanceof Error? error.message : "Invalid username or password");
+      if (axios.isAxiosError(error)) {
+        setLoginError(error?.response?.data?.responseMessage || "Invalid username or password");
+      } else {
+        setLoginError(error instanceof Error? error.message : "Invalid username or password");
+      }
     } finally{
       setIsLoading(false);
     }

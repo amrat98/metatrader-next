@@ -142,8 +142,13 @@ function VerifyFormContent() {
         toast.error(response.data.message || "Invalid OTP");
       }
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to verify OTP");
+      //toast.error(error instanceof Error ? error.message : "Failed to verify OTP");
       //toast.error(error.response?.data?.message || "Failed to verify OTP");
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.responseMessage || "Failed to verify OTP");
+      } else {
+        toast.error(error instanceof Error ? error.message : "Failed to verify OTP");
+      }
     } finally {
       setIsLoading(false);
     }

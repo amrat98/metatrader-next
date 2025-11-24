@@ -9,6 +9,8 @@ import React, {
 } from "react";
 import { apiConfig } from "./api-config";
 import { setCookie, deleteCookie, getCookie } from "cookies-next";
+import { routes } from "./routes";
+import { useRouter } from "next/navigation";
 
 // Types
 interface UserProfile {
@@ -183,6 +185,7 @@ export default function UserContextProvider({
   const [showSidebar, setShowSidebar] = useState(true);
   const [userToken, setUserToken] = useState<string | null>(null);
   const [investMent, setInvetMent] = useState(0);
+  const router = useRouter();
   const [dashBoardData, setDashBoardData] = useState<DashboardData | null>(
     null
   );
@@ -413,6 +416,8 @@ export default function UserContextProvider({
         ]);
       };
       fetchInitialData();
+    }else{
+      router.push(routes.login);
     }
   }, [userToken]);
 

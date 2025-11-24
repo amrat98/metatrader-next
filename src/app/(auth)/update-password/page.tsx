@@ -110,7 +110,12 @@ function UpdatePasswordFormContent() {
         toast.error(response.data.message || "Failed to reset password");
       }
     } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Failed to reset password");
+      //toast.error(error instanceof Error ? error.message : "Failed to reset password");
+      if (axios.isAxiosError(error)) {
+        toast.error(error.response?.data?.responseMessage || "Failed to reset password");
+      } else {
+        toast.error(error instanceof Error ? error.message : "Failed to reset password");
+      }
     } finally {
       setIsLoading(false);
     }
