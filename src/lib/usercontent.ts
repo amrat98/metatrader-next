@@ -276,13 +276,13 @@ export default function UserContextProvider({
 
   };
 
-  useEffect(() => {
-    console.log("userToken changed:", userToken);
-  }, [userToken]);
+  // useEffect(() => {
+  //   console.log("userToken changed:", userToken);
+  // }, [userToken]);
   
-  useEffect(() => {
-    console.log("mounted changed:", mounted);
-  }, [mounted]);
+  // useEffect(() => {
+  //   console.log("mounted changed:", mounted);
+  // }, [mounted]);
 
   useEffect(() => {
     if (userToken === null) {
