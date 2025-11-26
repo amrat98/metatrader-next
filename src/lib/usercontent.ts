@@ -251,7 +251,9 @@ export default function UserContextProvider({
     if (token) {
       setUserToken(token);
     }
-  }, []);
+  }, [userToken]);
+
+  //console.log('Token',userToken);
 
   const getProfile = useCallback(async () => {
     if (!userToken) return;
