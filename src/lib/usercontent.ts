@@ -204,6 +204,7 @@ export default function UserContextProvider({
 
   const logout = () => {
     deleteCookie("token");
+    router.push(routes.login);
     setUserToken(null);
     setProfile(null);
     setGlobalPlan(null);
@@ -416,6 +417,7 @@ export default function UserContextProvider({
         ]);
       };
       fetchInitialData();
+      //router.push(routes.dashboard);
     }else{
       router.push(routes.login);
     }

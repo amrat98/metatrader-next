@@ -307,7 +307,7 @@ export default function AccountLink() {
                   </>
                 ):(
                   <>
-                  <div className="p-4 py-10 mt-20 text-xl font-medium rounded-xl transition-all duration-300 border shadow-sm  meta-border meta-shine hover:meta-glow flex flex-col gap-10 items-center">
+                  <div className="p-4 py-10 mt-20 text-xl text-center font-medium rounded-xl transition-all duration-300 border shadow-sm  meta-border meta-shine hover:meta-glow flex flex-col gap-10 items-center">
                     <Button size="lg" type="button" variant="primary" className="text-xl"
                     onClick={()=> setShowForm(true)}
                     >Link your Account</Button>

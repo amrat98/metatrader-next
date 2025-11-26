@@ -42,7 +42,7 @@ export default function AdminLayout({
                 <TrendingUp className="w-6 h-6 text-black" />
               </div>
               <div>
-                <h1 className="font-bold text-lg bg-gradient-to-r from-brand-1 to-brand-2 bg-clip-text text-transparent">Billionaire's Blueprint</h1>
+                <h1 className="font-bold text-base sm:text-lg bg-gradient-to-r from-brand-1 to-brand-2 bg-clip-text text-transparent">Billionaire's Blueprint</h1>
                 <p className="text-xs text-muted-foreground">Premium Trading</p>
               </div>
             </div>
