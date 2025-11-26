@@ -196,24 +196,9 @@ export default function UserContextProvider({
   const [teamLegData, setTeamLegData] = useState<TeamLegData | null>(null);
   const [mounted, setMounted] = useState(false);
   const [bannerData, setBannerData] = useState<BannerData[] | null>(null);
-  const login = (newToken: string) => {
-    //setCookie('token', newToken, { maxAge: 60 * 5 }); // 5 minute
-    setCookie("token", newToken, { maxAge: 60 * 3 });
-    setUserToken(newToken);
-  };
 
-  const logout = () => {
-    deleteCookie("token");
-    router.push(routes.login);
-    setUserToken(null);
-    setProfile(null);
-    setGlobalPlan(null);
-    setGlobalAsset(null);
-    setDashBoardData(null);
-    setTeamData(null);
-    setTeamLegData(null);
-    setTeamComposition(null);
-  };
+
+
 
   useEffect(() => {
     let timeout: NodeJS.Timeout | null = null;
@@ -242,6 +227,7 @@ export default function UserContextProvider({
       if (timeout) clearTimeout(timeout);
     };
   }, []);
+
   useEffect(() => {
     setMounted(true);
     const token = document.cookie
@@ -251,9 +237,58 @@ export default function UserContextProvider({
     if (token) {
       setUserToken(token);
     }
-  }, [userToken]);
+  }, []);
+
+  // Redirect based on authentication status
+  useEffect(() => {
+    if (!mounted) return; // Wait until mounted (to avoid SSR hydration issues)
+
+    //console.log('Token', userToken, mounted);
+
+    if (userToken) {
+      router.push(routes.dashboard); // Redirect to dashboard after login or reload
+    } else {
+      router.push(routes.login); // Redirect to login if no token
+    }
+  }, [userToken, mounted, router]); // Depend on userToken and mount state
 
   //console.log('Token',userToken);
+
+
+
+  const login = (newToken: string) => {
+    //setCookie('token', newToken, { maxAge: 60 * 5 }); // 5 minute
+    setCookie("token", newToken, { maxAge: 60 * 3 });
+    setUserToken(newToken);
+  };
+
+  const logout = () => {
+    deleteCookie("token");
+    setMounted(false);
+    setUserToken(null);
+    // setProfile(null);
+    // setGlobalPlan(null);
+    // setGlobalAsset(null);
+    // setDashBoardData(null);
+    // setTeamData(null);
+    // setTeamLegData(null);
+    // setTeamComposition(null);
+
+  };
+
+  useEffect(() => {
+    console.log("userToken changed:", userToken);
+  }, [userToken]);
+  
+  useEffect(() => {
+    console.log("mounted changed:", mounted);
+  }, [mounted]);
+
+  useEffect(() => {
+    if (userToken === null) {
+      router.push(routes.login);
+    }
+  }, [userToken, router]);
 
   const getProfile = useCallback(async () => {
     if (!userToken) return;
@@ -406,6 +441,9 @@ export default function UserContextProvider({
 
   // Combine all initial data fetching into a single effect
   useEffect(() => {
+
+    if (!mounted) return; // Wait until mounted (to avoid SSR hydration issues)
+
     if (userToken) {
       const fetchInitialData = async () => {
         await Promise.all([
@@ -420,10 +458,8 @@ export default function UserContextProvider({
       };
       fetchInitialData();
       //router.push(routes.dashboard);
-    }else{
-      router.push(routes.login);
     }
-  }, [userToken]);
+  }, [mounted,userToken]);
 
   const contextValue: UserContextType = {
     login,
